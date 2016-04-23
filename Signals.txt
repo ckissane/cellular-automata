@@ -1,0 +1,135 @@
+@RULE Signals
+
+A 4-state CA created by Brian Silverman.  WireWorld models the flow of
+currents in wires and makes it relatively easy to build logic gates
+and other digital circuits.
+
+@TABLE
+
+# Golly rule-table format.
+# Each rule: C,N,NE,E,SE,S,SW,W,NW,C'
+#
+# Default for transitions not listed: no change
+#
+# Variables are bound within each transition. 
+# For example, if a={1,2} then 4,a,0->a represents
+# two transitions: 4,1,0->1 and 4,2,0->2
+# (This is why we need to repeat the variables below.
+#  In this case the method isn't really helping.)
+
+n_states:5
+neighborhood:VonNeumann
+symmetries:none
+var a={0,1,2,3,4,5}
+var b={0,1,2,3,4,5}
+var c={0,1,2,3,4,5}
+var d={0,1,2,3,4,5}
+1,a,b,c,d,2
+2,a,b,c,d,3
+3,a,b,c,1,1
+
+@NAMES
+
+# these state names are not yet used by Golly
+0 empty
+1 electron tail
+2 electron head
+3 copper wire
+
+@COLORS
+
+# same colors used at http://www.quinapalus.com/wi-index.html
+0  48  48  48   dark gray
+1 255 255 255   white
+2 255 255 255   white
+3 255 255 255   white
+4 255 255 255   white
+5 255 128   0   orange
+
+@ICONS
+
+# icon info is in XPM format (order is not important)
+
+XPM
+/* width height num_colors chars_per_pixel */
+"31 31 5 1"
+/* colors */
+". c #000000"
+"D c #404040"
+"C c #808080"
+"B c #C0C0C0"
+"W c #FFFFFF"
+/* pixels */
+"..............................."
+"..............................."
+"..........DCBWWWWWBCD.........."
+".........CWWWWWWWWWWWC........."
+".......DWWWWWWWWWWWWWWWD......."
+"......BWWWWWWWWWWWWWWWWWB......"
+".....BWWWWWWWWWWWWWWWWWWWB....."
+"....DWWWWWWWWWWWWWWWWWWWWWD...."
+"....WWWWWWWWWWWWWWWWWWWWWWW...."
+"...CWWWWWWWWWWWWWWWWWWWWWWWC..."
+"..DWWWWWWWWWWWWWWWWWWWWWWWWWD.."
+"..CWWWWWWWWWWWWWWWWWWWWWWWWWC.."
+"..BWWWWWWWWWWWWWWWWWWWWWWWWWB.."
+"..WWWWWWWWWWWWWWWWWWWWWWWWWWW.."
+"..WWWWWWWWWWWWWWWWWWWWWWWWWWW.."
+"..WWWWWWWWWWWWWWWWWWWWWWWWWWW.."
+"..WWWWWWWWWWWWWWWWWWWWWWWWWWW.."
+"..WWWWWWWWWWWWWWWWWWWWWWWWWWW.."
+"..BWWWWWWWWWWWWWWWWWWWWWWWWWB.."
+"..CWWWWWWWWWWWWWWWWWWWWWWWWWC.."
+"..DWWWWWWWWWWWWWWWWWWWWWWWWWD.."
+"...CWWWWWWWWWWWWWWWWWWWWWWWC..."
+"....WWWWWWWWWWWWWWWWWWWWWWW...."
+"....DWWWWWWWWWWWWWWWWWWWWWD...."
+".....BWWWWWWWWWWWWWWWWWWWB....."
+"......BWWWWWWWWWWWWWWWWWB......"
+".......DWWWWWWWWWWWWWWWD......."
+".........CWWWWWWWWWWWC........."
+"..........DCBWWWWWBCD.........."
+"..............................."
+"..............................."
+
+XPM
+/* width height num_colors chars_per_pixel */
+"15 15 4 1"
+/* colors */
+". c #000000"
+"D c #404040"
+"B c #C0C0C0"
+"W c #FFFFFF"
+/* pixels */
+"..............."
+"....DBWWWBD...."
+"...BWWWWWWWB..."
+"..BWWWWWWWWWB.."
+".DWWWWWWWWWWWD."
+".BWWWWWWWWWWWB."
+".WWWWWWWWWWWWW."
+".WWWWWWWWWWWWW."
+".WWWWWWWWWWWWW."
+".BWWWWWWWWWWWB."
+".DWWWWWWWWWWWD."
+"..BWWWWWWWWWB.."
+"...BWWWWWWWB..."
+"....DBWWWBD...."
+"..............."
+
+XPM
+/* width height num_colors chars_per_pixel */
+"7 7 4 1"
+/* colors */
+". c #000000"
+"D c #404040"
+"E c #E0E0E0"
+"W c #FFFFFF"
+/* pixels */
+".DEWED."
+"DWWWWWD"
+"EWWWWWE"
+"WWWWWWW"
+"EWWWWWE"
+"DWWWWWD"
+".DEWED."
