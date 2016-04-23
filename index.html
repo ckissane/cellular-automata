@@ -74,36 +74,47 @@
                 }
                 //console.log(cells);
             }
+function drawWithMouse(x,y){
 
+
+      var gridX = Math.floor((x - w / 2 + scrollX * zoom) / 10 / zoom);
+      var gridY = Math.floor((y - h / 2 + scrollY * zoom) / 10 / zoom);
+      if (cells["POS" + gridX + "_" + gridY] != null) {
+
+
+          if (paintColor == 0) {
+              delete cells["POS" + gridX + "_" + gridY];
+          } else {
+              cells["POS" + gridX + "_" + gridY] = {
+                  x: gridX,
+                  y: gridY,
+                  s: paintColor
+              };
+          }
+
+      } else {
+          if (paintColor == 0) {
+
+          } else {
+              cells["POS" + gridX + "_" + gridY] = {
+                  x: gridX,
+                  y: gridY,
+                  s: paintColor
+              };
+          }
+      }
+
+}
             function drag(event) {
                 if (dragging) {
+                  var oldMouseX=mouseX+0;
+                  var oldMouseY=mouseY+0;
                     mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
                     mouseY = (event.pageY - $('#c').offset().top) + $(window).scrollTop();
-                    var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
-                    var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
-                    if (cells["POS" + gridX + "_" + gridY] != null) {
-
-
-                        if (paintColor == 0) {
-                            delete cells["POS" + gridX + "_" + gridY];
-                        } else {
-                            cells["POS" + gridX + "_" + gridY] = {
-                                x: gridX,
-                                y: gridY,
-                                s: paintColor
-                            };
-                        }
-
-                    } else {
-                        if (paintColor == 0) {
-
-                        } else {
-                            cells["POS" + gridX + "_" + gridY] = {
-                                x: gridX,
-                                y: gridY,
-                                s: paintColor
-                            };
-                        }
+                    var diff={x:mouseX-oldMouseX,y:mouseY-oldMouseY};
+                    var dist=Math.sqrt(diff.x*diff.x+diff.y+diff.y);
+                    for(var i=0;i<1;i+=1.0/dist){
+                      drawWithMouse(oldMouseX+diff.x*i,oldMouseY+diff.y*i);
                     }
                 } else {
                     mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
