@@ -175,8 +175,18 @@ function clone(obj) {
     return copy;
 }
 
-
-updateRules();
+if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
+        Rule = eval($("#rules").val());
+        
+        var brush = 0;
+        $(".color-select").html("");
+        var colors = ["black"].concat(Rule.colors);
+        for (var i = 0; i < colors.length; i++) {
+            console.log(colors);
+            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+        }
+    }
+//updateRules();
 //$(".rule-script").html($(".rule-area").val());
 /*addCell(0, 0, 1);
 addCell(1, 0, 1);
@@ -533,6 +543,16 @@ function selectRule() {
     //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
         Rule = eval($("#rules").val());
+        
+        var brush = 0;
+        $(".color-select").html("");
+        var colors = ["black"].concat(Rule.colors);
+        for (var i = 0; i < colors.length; i++) {
+            console.log(colors);
+            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+        }
+    }
+    if(params.rule!=$("#rules").val()){
         var newSearch="";
         var paramList=[];
         for(var i in params){
@@ -545,12 +565,5 @@ function selectRule() {
             }
         }
         parent.location.search = paramList.join("&");
-        var brush = 0;
-        $(".color-select").html("");
-        var colors = ["black"].concat(Rule.colors);
-        for (var i = 0; i < colors.length; i++) {
-            console.log(colors);
-            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
-        }
     }
 }
