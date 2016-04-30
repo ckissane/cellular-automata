@@ -533,6 +533,7 @@ function selectRule() {
     //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
         Rule = eval($("#rules").val());
+        parent.location.search = $("#rules").val();
         var brush = 0;
         $(".color-select").html("");
         var colors = ["black"].concat(Rule.colors);
