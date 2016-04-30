@@ -418,12 +418,14 @@ var Caves = {
                 var state = 0;
                 if (Math.random() > 0.5) {
                     state = 1;
-                }
-                cells["POS" + gridX + "_" + gridY] = {
+                    cells["POS" + gridX + "_" + gridY] = {
                     x: gridX,
                     y: gridY,
                     s: state
                 };
+                }
+                
+                
             }
         }
     }
