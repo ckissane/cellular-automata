@@ -538,9 +538,9 @@ function selectRule() {
         for(var i in params){
             if(params.hasOwnProperty(i)){
                 if(i=="rule"){
-                    paramsList.push("rule="+$("#rules").val());
+                    paramList.push("rule="+$("#rules").val());
                 }else{
-                    paramsList.push(i+"="+params[i]);
+                    paramList.push(i+"="+params[i]);
                 }
             }
         }
