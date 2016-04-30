@@ -564,7 +564,7 @@ function selectRule() {
                 }
             }
         }
-        history.pushState({}, null, "?"+paramList.join("&"));
+        history.replaceState({}, null, "?"+paramList.join("&"));
        // window. = paramList.join("&");
     }
 }
