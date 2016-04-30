@@ -55,14 +55,14 @@
                     if (cells["POS" + gridX + "_" + gridY].s == Rule.states - 1) {
                         // cells[gridX+","+gridY]=null;
                         delete cells["POS" + gridX + "_" + gridY];
-                        //paintColor = 0;
+                        paintColor = 0;
                     } else if (cells["POS" + gridX + "_" + gridY].s != 0) {
                         cells["POS" + gridX + "_" + gridY] = {
                             x: gridX,
                             y: gridY,
                             s: cells["POS" + gridX + "_" + gridY].s + 1
                         };
-                        //paintColor = cells["POS" + gridX + "_" + gridY].s;
+                        paintColor = cells["POS" + gridX + "_" + gridY].s;
                     }
                 } else {
                     cells["POS" + gridX + "_" + gridY] = {
@@ -70,7 +70,7 @@
                         y: gridY,
                         s: 1
                     };
-                    //paintColor = 1;
+                    paintColor = 1;
                 }
                 //console.log(cells);
             }

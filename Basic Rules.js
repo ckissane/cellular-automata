@@ -59,7 +59,7 @@ var Extended2MooreB10S10 = {
                 nebCount++;
             }
         }
-        if (nebCount == 9 ||nebCount == 7) {
+        if (nebCount == 6||(nebCount == 4 && cell.s===1) ) {
             return 1;
         } else {
             return 0;
@@ -94,7 +94,7 @@ var ExtendedMooreB56S45 = {
                 nebCount++;
             }
         }
-        if (nebCount == 5||((nebCount == 6) && cell.s!==1)|| ((nebCount == 4) && cell.s===1)) {
+        if (nebCount == 5||((nebCount == 8))|| ((nebCount == 3) && cell.s===1)) {
             return 1;
         } else {
             return 0;
