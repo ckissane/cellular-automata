@@ -26,7 +26,7 @@ var running = false;
 var calcLoop = null;
 var paintColor = 1;
 var dragging = false;
-var queryString = url.substring( url.indexOf('?') + 1 );
+var queryString = document.URL.substring( document.URL.indexOf('?') + 1 );
 var params = parseQueryString(queryString);
 console.log(params);
 
