@@ -533,7 +533,18 @@ function selectRule() {
     //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
         Rule = eval($("#rules").val());
-        parent.location.search.rule = $("#rules").val();
+        var newSearch="";
+        var paramList=[];
+        for(var i in params){
+            if(params.isOwnProperty(i)){
+                if(i=="rule"){
+                    paramsList.push("rule="+$("#rules").val());
+                }else{
+                    paramsList.push(i+"="+params[i]);
+                }
+            }
+        }
+        parent.location.search = paramList.join("&");
         var brush = 0;
         $(".color-select").html("");
         var colors = ["black"].concat(Rule.colors);
