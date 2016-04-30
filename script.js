@@ -564,6 +564,7 @@ function selectRule() {
                 }
             }
         }
-        parent.location.search = paramList.join("&");
+        history.pushState({}, null, window.URL+paramList.join("&"));
+       // window. = paramList.join("&");
     }
 }
