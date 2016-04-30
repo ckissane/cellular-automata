@@ -26,7 +26,24 @@ var running = false;
 var calcLoop = null;
 var paintColor = 1;
 var dragging = false;
+var query = window.location.search.substr(1);
+var params = parseQueryString(query);
+console.log(params);
 
+function parseQueryString( queryString ) {
+    var params = {}, queries, temp, i, l;
+
+    // Split into key/value pairs
+    queries = queryString.split("&");
+
+    // Convert the array of strings into an object
+    for ( i = 0, l = queries.length; i < l; i++ ) {
+        temp = queries[i].split('=');
+        params[temp[0]] = temp[1];
+    }
+
+    return params;
+};
 function savePattern() {
     download();
 }
@@ -72,8 +89,8 @@ function MouseWheelHandler(e) {
     zoom = zoom * Math.pow(1.5, -delta);
     var newOffsetX = e.pageX - 0 - document.body.scrollLeft - w / 2;
     var newOffsetY = e.pageY - 0 - document.body.scrollTop - h / 2;
-    if (zoom < Math.pow(1.5, -6)) {
-        zoom = Math.pow(1.5, -6);
+    if (zoom < Math.pow(1.5, -16)) {
+        zoom = Math.pow(1.5, -16);
     }
     if (zoom > Math.pow(1.5, 6)) {
         zoom = Math.pow(1.5, 6);
@@ -157,7 +174,7 @@ function clone(obj) {
 
 updateRules();
 //$(".rule-script").html($(".rule-area").val());
-addCell(0, 0, 1);
+/*addCell(0, 0, 1);
 addCell(1, 0, 1);
 addCell(0, 1, 1);
 addCell(1, 1, 1);
@@ -166,7 +183,12 @@ addCell(1, 2, 2);
 addCell(-1, 4, 1);
 addCell(2, 4, 1);
 addCell(-1, 5, 1);
-addCell(2, 5, 1);
+addCell(2, 5, 1);*/
+
+/*for(var i=-300;i<300;i++){
+  addCell(i, 0, 1);
+}*/
+
 //randomCells();
 //(".rule-script").html($(".rule-area").val());
 window.setInterval(tick, 1);
@@ -407,7 +429,7 @@ function tick() {
     countCells();
     //findGroups();
     for (var cell in cells) {
-
+      if(zoom > Math.pow(1.5, -6)){
         if (cell.substr(0, 3) == "POS") {
             if (cells[cell].s != 2) {
                 ctx.fillStyle = "red";
@@ -421,6 +443,21 @@ function tick() {
             ctx.fillRect(boxX, boxY, 10, 10);
             ctx.fill();
         }
+      }else{
+        if (cell.substr(0, 3) == "POS") {
+            if (cells[cell].s != 2) {
+                ctx.fillStyle = "red";
+            } else {
+                ctx.fillStyle = "blue";
+            }
+            ctx.fillStyle = Rule.colors[cells[cell].s - 1];
+            var boxX = cells[cell].x * 10 - scrollX;
+            var boxY = cells[cell].y * 10 - scrollY;
+            ctx.beginPath();
+            ctx.fillRect(boxX, boxY, 1/zoom, 1/zoom);
+            ctx.fill();
+        }
+      }
     }
 }
 
