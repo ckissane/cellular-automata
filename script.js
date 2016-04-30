@@ -29,7 +29,11 @@ var dragging = false;
 var queryString = document.URL.substring( document.URL.indexOf('?') + 1 );
 var params = parseQueryString(queryString);
 console.log(params);
-
+if(params.rule){
+    if($('option[value="'+params.rule+'"]')[0]){
+        $("#rules").val(params.rule);
+    }
+}
 function parseQueryString( queryString ) {
     var params = {}, queries, temp, i, l;
 
