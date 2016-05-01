@@ -732,7 +732,8 @@ function selectRule() {
                 }
             }
         }
-        document.URL.search="?"+paramList.join("&");
+        document.location =   document.location.split("?")[0]+"?"+paramList.join("&");
+
         //history.pushState({}, null, "?"+paramList.join("&"));
        // window. = paramList.join("&");
     }
