@@ -412,18 +412,20 @@ var Caves = {
     },
     random: function() {
         for (var i = 0; i < 100; i++) {
-            for (var y = 0; y < 50; y++) {
+            for (var y = 0; y < 100; y++) {
                 var gridX = i - 50;
-                var gridY = y - 25;
+                var gridY = y - 50;
                 var state = 0;
                 if (Math.random() > 0.5) {
                     state = 1;
-                }
-                cells["POS" + gridX + "_" + gridY] = {
+                    cells["POS" + gridX + "_" + gridY] = {
                     x: gridX,
                     y: gridY,
                     s: state
                 };
+                }
+
+
             }
         }
     }

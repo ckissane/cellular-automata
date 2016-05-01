@@ -30,6 +30,11 @@ var queryString = document.URL.substring( document.URL.indexOf('?') + 1 );
 var params = parseQueryString(queryString);
 console.log(params);
 
+if(params.rule){
+    if($('option[value="'+params.rule+'"]')[0]){
+        $("#rules").val(params.rule);
+    }
+}
 function convertFromHash(hash){
   var largeNumber=0;
   var out="";
@@ -191,8 +196,9 @@ function loadSave(x) {
     for (var i = 0; i < cellList.length; i++) {
         var element = cellList[i].split(",");
         addCell(parseInt(element[0]), parseInt(element[1]), parseInt(element[2]));
+      }
     }
-}
+
 function parseQueryString( queryString ) {
     var params = {}, queries, temp, i, l;
 
@@ -337,8 +343,18 @@ function clone(obj) {
     return copy;
 }
 
+if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
+        Rule = eval($("#rules").val());
 
-updateRules();
+        var brush = 0;
+        $(".color-select").html("");
+        var colors = ["black"].concat(Rule.colors);
+        for (var i = 0; i < colors.length; i++) {
+            console.log(colors);
+            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+        }
+    }
+//updateRules();
 //$(".rule-script").html($(".rule-area").val());
 /*addCell(0, 0, 1);
 addCell(1, 0, 1);
@@ -695,6 +711,7 @@ function selectRule() {
     //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
         Rule = eval($("#rules").val());
+
         var brush = 0;
         $(".color-select").html("");
         var colors = ["black"].concat(Rule.colors);
@@ -702,5 +719,20 @@ function selectRule() {
             console.log(colors);
             var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
         }
+    }
+    if(params.rule!=$("#rules").val()){
+        var newSearch="";
+        var paramList=[];
+        for(var i in params){
+            if(params.hasOwnProperty(i)){
+                if(i=="rule"){
+                    paramList.push("rule="+$("#rules").val());
+                }else{
+                    paramList.push(i+"="+params[i]);
+                }
+            }
+        }
+        history.pushState({}, null, "?"+paramList.join("&"));
+       // window. = paramList.join("&");
     }
 }
