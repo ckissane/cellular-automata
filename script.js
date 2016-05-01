@@ -47,6 +47,8 @@ if(params.rule){
     if($('option[value="'+params.rule+'"]')[0]){
         $("#rules").val(params.rule);
     }
+}else{
+  params.rule="ExtendedMooreB4S4";
 }
 function convertFromHash(hash){
   var largeNumber=0;
