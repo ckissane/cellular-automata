@@ -27,9 +27,25 @@ var calcLoop = null;
 var paintColor = 1;
 var dragging = false;
 var queryString = document.URL.substring( document.URL.indexOf('?') + 1 );
+if(document.URL.indexOf('?')===-1){
+queryString="";
+}
 var params = parseQueryString(queryString);
 console.log(params);
+function parseQueryString( queryString ) {
+    var params = {}, queries, temp, i, l;
 
+    // Split into key/value pairs
+    queries = queryString.split("&");
+
+    // Convert the array of strings into an object
+    for ( i = 0, l = queries.length; i < l; i++ ) {
+        temp = queries[i].split('=');
+        params[temp[0]] = temp[1];
+    }
+
+    return params;
+};
 if(params.rule){
     if($('option[value="'+params.rule+'"]')[0]){
         $("#rules").val(params.rule);
@@ -199,20 +215,7 @@ function loadSave(x) {
       }
     }
 
-function parseQueryString( queryString ) {
-    var params = {}, queries, temp, i, l;
 
-    // Split into key/value pairs
-    queries = queryString.split("&");
-
-    // Convert the array of strings into an object
-    for ( i = 0, l = queries.length; i < l; i++ ) {
-        temp = queries[i].split('=');
-        params[temp[0]] = temp[1];
-    }
-
-    return params;
-};
 function savePattern() {
     download();
 }
