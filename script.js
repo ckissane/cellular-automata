@@ -708,7 +708,16 @@ function loadFileAsText() {
     fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
-
+function cloneObject(obj) {
+    var clone = {};
+    for(var i in obj) {
+        if(typeof(obj[i])=="object" && obj[i] != null)
+            clone[i] = cloneObject(obj[i]);
+        else
+            clone[i] = obj[i];
+    }
+    return clone;
+}
 function selectRule() {
     //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
@@ -718,7 +727,7 @@ function selectRule() {
         $(".color-select").html("");
         var colors = ["black"].concat(Rule.colors);
         for (var i = 0; i < colors.length; i++) {
-            console.log(colors);
+            //console.log(colors);
             var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
         }
     }
@@ -737,9 +746,11 @@ function selectRule() {
         if(!params.hasOwnProperty("rule")){
           paramList.push("rule="+$("#rules").val());
         }
-        document.location.search="?"+paramList.join("&");
-
-        //history.pushState({}, null, "?"+paramList.join("&"));
+        var loc="?"+paramList.join("&");
+        var current=document.location.href;
+        var stateObj = {  current: loc };
+        history.pushState(stateObj, "Super Cellular Automata", loc);
+        //history.pushState({}, loc, loc);
        // window. = paramList.join("&");
     }
 }
