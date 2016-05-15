@@ -358,7 +358,7 @@ if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
     }
 //updateRules();
 //$(".rule-script").html($(".rule-area").val());
-/*addCell(0, 0, 1);
+addCell(0, 0, 1);
 addCell(1, 0, 1);
 addCell(0, 1, 1);
 addCell(1, 1, 1);
@@ -367,7 +367,7 @@ addCell(1, 2, 2);
 addCell(-1, 4, 1);
 addCell(2, 4, 1);
 addCell(-1, 5, 1);
-addCell(2, 5, 1);*/
+addCell(2, 5, 1);
 
 /*for(var i=-300;i<300;i++){
   addCell(i, 0, 1);
@@ -753,4 +753,14 @@ function selectRule() {
         //history.pushState({}, loc, loc);
        // window. = paramList.join("&");
     }
+}
+function printCells(){
+    var cellArray=[];
+for (var cell in cells) {
+
+        if (cell.substr(0, 3) == "POS") {
+            cellArray.push([cells[cell].x,cells[cell].y,cells[cell].s]);
+        }
+    }
+    console.log(cellArray);
 }
