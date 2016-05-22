@@ -389,22 +389,32 @@ if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
 // addCell(-1, 13, 1);
 // addCell(0, 12, 1);
 // addCell(-1, 12, 1);
+// ?3,4;3,5;4,4;4,5;3,-7;3,-8;4,-7;4,-8
 
-//crazygro2
-addCell(0, 0, 1);
-addCell(-1, 0, 1);
-addCell(0, 1, 1);
-addCell(-1, 1, 1);
-addCell(0, 5, 1);
-addCell(-1, 5, 1);
-addCell(0, 6, 1);
-addCell(-1, 6, 1);
-addCell(0, 7, 1);
-addCell(-1, 7, 1);
-addCell(1, 3, 1);
-addCell(-2, 3, 1);
-addCell(2, 3, 1);
-addCell(-3, 3, 1);
+//crazygro3
+// addCell(0, 0, 1);
+// addCell(-1, 0, 1);
+// addCell(0, 1, 1);
+// addCell(-1, 1, 1);
+// addCell(0, 5, 1);
+// addCell(-1, 5, 1);
+// addCell(0, 6, 1);
+// addCell(-1, 6, 1);
+// addCell(0, 7, 1);
+// addCell(-1, 7, 1);
+// addCell(1, 3, 1);
+// addCell(-2, 3, 1);
+// addCell(2, 3, 1);
+// addCell(-3, 3, 1);
+
+var q = window.location.search.substr(1);
+var pairs = q.split(";")
+pairs.forEach(function(p) {
+    var xy = p.split(",");
+    var x = parseInt(xy[0]);
+    var y = parseInt(xy[1]);
+    addCell(x, y, 1);
+});
 
 /*for(var i=-300;i<300;i++){
   addCell(i, 0, 1);
