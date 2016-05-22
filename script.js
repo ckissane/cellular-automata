@@ -358,54 +358,20 @@ if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
     }
 //updateRules();
 //$(".rule-script").html($(".rule-area").val());
+
 //crazygro
-// addCell(0, 0, 1);
-// addCell(1, 0, 1);
-// addCell(0, 1, 1);
-// addCell(1, 1, 1);
-// addCell(0, 2, 1);
-// addCell(1, 2, 1);
-// addCell(-1, 4, 1);
-// addCell(2, 4, 1);
-// addCell(-1, 5, 1);
-// addCell(2, 5, 1);
+// ?0,0;0,1;1,0;1,1;2,0;2,1;-3,2;-2,2;-3,-1;-2,-1
 
 //simple glider
-// addCell(0, 3, 1);
-// addCell(1, 3, 1);
-// addCell(2, 3, 1);
-// addCell(3, 3, 1);
-// addCell(4, 1, 1);
-// addCell(4, 0, 1);
-// addCell(-1, 1, 1);
-// addCell(-1, 0, 1);
+// ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;3,4
+
+// glider with extra something ?0,0;0,1;1,0;1,1;2,0;2,1;-1,2;-2,2;-1,-1;-2,-1
 
 //crazygro2
-// addCell(0, 0, 1);
-// addCell(-1, 0, 1);
-// addCell(0, 1, 1);
-// addCell(-1, 1, 1);
-// addCell(0, 13, 1);
-// addCell(-1, 13, 1);
-// addCell(0, 12, 1);
-// addCell(-1, 12, 1);
 // ?3,4;3,5;4,4;4,5;3,-7;3,-8;4,-7;4,-8
 
 //crazygro3
-// addCell(0, 0, 1);
-// addCell(-1, 0, 1);
-// addCell(0, 1, 1);
-// addCell(-1, 1, 1);
-// addCell(0, 5, 1);
-// addCell(-1, 5, 1);
-// addCell(0, 6, 1);
-// addCell(-1, 6, 1);
-// addCell(0, 7, 1);
-// addCell(-1, 7, 1);
-// addCell(1, 3, 1);
-// addCell(-2, 3, 1);
-// addCell(2, 3, 1);
-// addCell(-3, 3, 1);
+//?0,0;0,1;1,0;1,1;5,0;5,1;6,0;6,1;7,0;7,1;3,2;3,3;3,-1;3,-2
 
 var q = window.location.search.substr(1);
 var pairs = q.split(";")
