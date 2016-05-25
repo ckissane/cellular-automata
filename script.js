@@ -358,16 +358,61 @@ if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
     }
 //updateRules();
 //$(".rule-script").html($(".rule-area").val());
-/*addCell(0, 0, 1);
-addCell(1, 0, 1);
-addCell(0, 1, 1);
-addCell(1, 1, 1);
-addCell(0, 2, 2);
-addCell(1, 2, 2);
-addCell(-1, 4, 1);
-addCell(2, 4, 1);
-addCell(-1, 5, 1);
-addCell(2, 5, 1);*/
+
+//crazygro
+// ?0,0;0,1;1,0;1,1;2,0;2,1;-3,2;-2,2;-3,-1;-2,-1
+
+//simple glider
+// ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;3,4
+
+// glider with extra something ?0,0;0,1;1,0;1,1;2,0;2,1;-1,2;-2,2;-1,-1;-2,-1
+
+//crazygro2
+// ?3,4;3,5;4,4;4,5;3,-7;3,-8;4,-7;4,-8
+
+//crazygro3
+//?0,0;0,1;1,0;1,1;5,0;5,1;6,0;6,1;7,0;7,1;3,2;3,3;3,-1;3,-2
+
+// pisser ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4
+// 4-cycle glider ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4;4,0
+
+// surprise surprise ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4;4,1
+
+// fertile crescent ?0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4;5,4;5,3
+
+// cross ?0,0;0,1;1,0;1,1;2,0;2,1;3,-2;3,3;6,-2;6,3
+
+// full monte ?0,0;0,1;1,0;1,1;2,0;2,1;3,-2;3,3;6,-2;6,3;7,0;7,1;8,0;8,1;9,0;9,1
+
+// fireworks ?0,0;0,1;1,0;1,1;2,0;2,1;4,2;5,2;4,-1;5,-1
+
+// hellfire ?0,60;0,61;1,60;1,61;0,62;1,62;2,63;-1,63
+
+// piss2 ?0,60;0,61;1,60;1,61;0,62;1,62;2,63;-1,63;-1,66;0,66;1,66;2,66
+
+// 12-step ?0,60;0,61;1,60;1,61;0,62;1,62;3,63;-1,63;
+
+// unexpected ?0,60;0,61;1,60;1,61;0,62;1,62;3,63;-1,63;-1,64;-2,65;-2,66;-2,68
+
+// stone1 ?0,0;1,1;-1,1;-1,-1;1,-1
+
+// stone2 ?0,0;0,1;1,0;2,0;2,1
+
+// make a stone ?0,0;0,1;1,0;1,1;5,0;5,1;6,0;6,1;7,0;7,1;3,2;3,3
+
+// germ ?0,0;0,1;1,0;1,1;2,0;2,1;3,0;3,1
+
+// germ2 ?0,0;0,1;1,0;1,1;2,0;2,1;3,0;3,1;4,0;4,1;5,0;5,1
+
+// Virus ?0,0;0,1;1,0;1,1;2,0;2,1;6,0;6,1;4,0;4,1;5,0;5,1
+var q = window.location.search.substr(1);
+var pairs = q.split(";")
+pairs.forEach(function(p) {
+    var xy = p.split(",");
+    var x = parseInt(xy[0]);
+    var y = parseInt(xy[1]);
+    addCell(x, y, 1);
+});
 
 /*for(var i=-300;i<300;i++){
   addCell(i, 0, 1);
@@ -753,4 +798,14 @@ function selectRule() {
         //history.pushState({}, loc, loc);
        // window. = paramList.join("&");
     }
+}
+function printCells(){
+    var cellArray=[];
+for (var cell in cells) {
+
+        if (cell.substr(0, 3) == "POS") {
+            cellArray.push([cells[cell].x,cells[cell].y,cells[cell].s]);
+        }
+    }
+    console.log(cellArray);
 }
