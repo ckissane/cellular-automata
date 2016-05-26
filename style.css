@@ -131,12 +131,12 @@ div.canvas-cont-big {
     margin-left:0px;
     padding:0px;
     margin-bottom:0px;
-    
+
 }
 .canvas-cont-big.options-off {
     width:calc( 100% );
     box-sizing: border-box;
-    
+
     height:calc( 100% - 60px );
     margin-top:0px;
     margin-left:0px;
@@ -145,10 +145,10 @@ div.canvas-cont-big {
 }
 .canvas-cont {
     width:100%;
-    
+
     height:calc( 100% - 35px );
     margin:0px;
-    
+
     padding:0px;
     margin-bottom:0px;
 }
@@ -164,7 +164,7 @@ height: 35px;
     display:inline-block;
     vertical-align:middle;
     height:30px;
-    
+
 }
 .canvas-toolbar table{
     width:100%;
@@ -232,7 +232,7 @@ div.options-container.options-off {
     overflow-x:hidden;
 }
 div.options {
-    
+
     text-align:center;
     box-sizing: border-box;
     height:calc( 100% - 35px );
@@ -259,7 +259,7 @@ div.options {
     display: block;
 }
 .options-section-title {
-   
+
     padding:10px;
     font-size:28px;
 }
@@ -287,17 +287,17 @@ div.options {
 
 }
 div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
- 
+
     position: relative;
     display:box;
     vertical-align: middle;
     margin-left:20px;
     margin-right:20px;
     margin-bottom:10px;
-    
+
 }
 
-.running-group,#save-button,#set-pattern-button,#up-rule-button{
+.running-group,#save-button,#set-pattern-button,#up-rule-button,#make-hash-button{
     margin-bottom:10px;
 }
 .form-control{
@@ -305,19 +305,19 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
     width:150px;
     margin:0px;
     min-height:10px;
-    
+
     margin-left:calc( 50% - 76px );
     margin-bottom:10px;
 }
 .pattern-select > *{
-    
+
     fpadding-right:0px;
     text-overflow: ellipsis;
     white-space: nowrap;
   overflow: hidden;
 }
 .pattern-select option{
-    
+
     fpadding-right:0px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -325,15 +325,15 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
 
 }
 #fileupload{
-    
+
     min-width:10px;
     width:150px;
     margin:0px;
     min-height:10px;
-    
+
     margin-left:calc( 50% - 76px );
     margin-bottom:10px;
-   
+
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 font-size: 14px;
 }
@@ -356,10 +356,10 @@ font-size: 14px;
 /* Let's get this party started */
 ::-webkit-scrollbar {
     width: 12px;
-    
-   
+
+
 }
- 
+
 /* Track */
 ::-webkit-scrollbar-track {
     background-color: #f5f5f5;
@@ -372,7 +372,7 @@ font-size: 14px;
      sborder-top-right-radius: 4px;
       sborder-bottom-right-radius: 4px;
       border-left: solid 1px rgb(204, 204, 204);
-      
+
 }
 .world-icon{
     background:url("Glider.png");
@@ -380,13 +380,13 @@ font-size: 14px;
     background-size:85%;
     background-position:center;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0px;
     border-radius: 0px;
-    dbackground: rgba(200,200,200,0.8); 
-    box-shadow:1px 0 1px rgb(204, 204, 204); 
+    dbackground: rgba(200,200,200,0.8);
+    box-shadow:1px 0 1px rgb(204, 204, 204);
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     background-color: rgb(255, 255, 255);
@@ -395,7 +395,7 @@ font-size: 14px;
     margin-right:-1px;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	dbackground: rgba(200,200,200,0.4); 
+	dbackground: rgba(200,200,200,0.4);
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
@@ -428,5 +428,5 @@ font-size: 14px;
     line-height:13px;
 }
 .gwt-MenuBar-horizontal{
-    
+
 }
