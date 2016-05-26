@@ -99,7 +99,7 @@ function makehash(){
   for (var cell in cells) {
 
       if (cell.substr(0, 3) == "POS") {
-          cellArray = cellArray.concat([cells[cell].x.toString(36) + "," + cells[cell].y.toString(36) + "," + cells[cell].s.toString(36)]);
+          cellArray = cellArray.concat([cells[cell].x.toString(36) + "," + cells[cell].y.toString(36) + (cells[cell].s===1?"":"," + cells[cell].s.toString(36)]));
       }
   }
   cellArray.sort(compare);
@@ -131,7 +131,7 @@ function makehash(){
   if(!params.hasOwnProperty("base")){
     paramList.push("base="+36);
   }
-  
+
 
   var loc="?"+paramList.join("&");
   var current=document.location.href;
