@@ -732,8 +732,8 @@ function tick() {
 
             ctx.beginPath();
             ctx.strokeStyle = "yellow";
-            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 0 * 10);
-            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 0 * 10);
+            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
+            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.stroke();
 
 
