@@ -261,7 +261,7 @@
 }
 
 .fsc-DrivePanel:hover .fsc-AppIcon {
-	opacity: 0;
+	opacity: 1;
 }
 
 .fsc-DrivePanel:hover .fsc-DriveIcon {
@@ -494,7 +494,7 @@
 
 .gwt-MenuBar-horizontal {
 	height: 36px;
-	margin: 0 24px 0 51px;
+	margin: 0 24px 0 71px;
 	outline: none;
 	position: relative;
 	z-index: 998;
@@ -732,7 +732,7 @@ table td {
 	background-color: #2d2d2d;
 	padding-left: 20px;
 	padding-right: 20px;
-	box-sizing: border-box;		
+	box-sizing: border-box;
 }
 
 .fs-MenuBar div,.fs-MenuBar a {
@@ -746,7 +746,7 @@ table td {
 }
 
 .fs-LicensePanel {
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .fs-LicensePanel .gwt-Image {
@@ -769,7 +769,7 @@ table td {
 
 .fs-AddToApps {
 	margin-top: 12px;
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .fs-Star {
@@ -813,7 +813,7 @@ table td {
 }
 
 .fs-HighlightImage {
-	
+
 }
 
 .fs-HighlightTitle,.fs-HighlightContent {
@@ -941,7 +941,7 @@ table td {
 }
 
 .login-dialog {
-	
+
 }
 
 .login-message {
@@ -963,7 +963,7 @@ table td {
 }
 
 .hint-popup {
-	
+
 }
 
 .hint-message-panel {
@@ -1326,7 +1326,7 @@ table td {
 }
 
 .gwt-CheckBox {
-	
+
 }
 
 .gwt-CheckBox-disabled {
@@ -1334,11 +1334,11 @@ table td {
 }
 
 .gwt-FileUpload {
-	
+
 }
 
 .gwt-HorizontalSplitPanel {
-	
+
 }
 
 .gwt-HorizontalSplitPanel .hsplitter {
@@ -1348,7 +1348,7 @@ table td {
 }
 
 .gwt-VerticalSplitPanel {
-	
+
 }
 
 .gwt-VerticalSplitPanel .vsplitter {
@@ -1358,23 +1358,23 @@ table td {
 }
 
 .gwt-HTML {
-	
+
 }
 
 .gwt-Hyperlink {
-	
+
 }
 
 .gwt-Image {
-	
+
 }
 
 .gwt-Label {
-	
+
 }
 
 .gwt-ListBox {
-	
+
 }
 
 .gwt-PasswordTextBox {
@@ -1392,7 +1392,7 @@ table td {
 }
 
 .gwt-RadioButton {
-	
+
 }
 
 .gwt-RadioButton-disabled {
@@ -1400,7 +1400,7 @@ table td {
 }
 
 .gwt-RichTextArea {
-	
+
 }
 
 .hasRichTextToolbar {
@@ -1598,7 +1598,7 @@ table td {
 }
 
 .gwt-DateBox input {
-	
+
 }
 
 .dateBoxFormatError {
@@ -1606,7 +1606,7 @@ table td {
 }
 
 .dateBoxPopup {
-	
+
 }
 
 .gwt-DatePicker {

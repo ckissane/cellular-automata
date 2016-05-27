@@ -3,7 +3,7 @@
 
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="Celly.css" rel="stylesheet">
         <script src="Filesaver.js"></script>
         <script src="drivefilepicker.js"></script>
@@ -146,7 +146,7 @@ function drawWithMouse(x,y){
 
     <body>
         <div class="drive-bar">
-            <div style="position: absolute; overflow: hidden; left: 55px; top: 0px; right: 25%; height: 34px;">
+            <div style="position: absolute; overflow: hidden; left: 75px; top: 0px; right: 25%; height: 34px;">
                 <table cellspacing="0" cellpadding="0" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px;">
                     <tbody>
                         <tr>
@@ -163,15 +163,15 @@ function drawWithMouse(x,y){
                     </tbody>
                 </table>
             </div>
-            <div style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 40px; height: 60px;">
+            <div style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 60px; height: 60px;">
                 <div tabindex="0" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px;">
                     <input type="text" tabindex="-1" role="presentation" style="opacity: 0; height: 1px; width: 1px; z-index: -1; overflow: hidden; position: absolute;">
-                    <div class="fsc-FontIcon fsc-DrivePanel" style="position: relative; overflow: hidden; width: 40px; height: 60px; background-color: rgb(86, 97,225);">
+                    <div class="fsc-FontIcon fsc-DrivePanel" style="position: relative; overflow: hidden; width: 60px; height: 60px; background-color: rgb(86, 97,225);">
 
-                        <div class="fsc-FontIcon fsc-AppIcon the-icon" style="position: absolute; left: 8px; top: 18px;">
+                        <div class="fsc-FontIcon fsc-AppIcon the-icon" style="position: absolute; left: 8px; top: 8px;">
                             <img src="Glider.png">
                         </div>
-                        <div class="fsc-DriveIcon the-icon-drive" style="position: absolute; left: 7px; top: 18px;"></div>
+
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@ function drawWithMouse(x,y){
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File</td>
+                                                <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File<div class="menu-popup">Save</div></td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit</td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-35" role="menuitem" aria-haspopup="true">View</td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-37" role="menuitem" aria-haspopup="true">Help</td>
@@ -277,9 +277,15 @@ function drawWithMouse(x,y){
 
 
         <div class="canvas-cont-big fse-EditorPanel" style="overflow:hidden">
-            <div class="fs-Toolbar options-toolbar" style="overflow:hidden">
-
-                <div class="fsc-DocumentName" style="vertical-align: middle;text-align:center;margin-top:3px">Color:</div>
+            <div class="fs-Toolbar options-toolbar canvas-toolbar" style="overflow:hidden">
+              <div class="tool-item-row">
+                  <div class="tool-item-button"><i class="fa fa-play"></i></div>
+                  <div class="tool-item-button"><i class="fa fa-pencil"></i></div>
+                  <div class="tool-item-button"><i class="fa fa-eyedropper"></i></div>
+                  <div class="tool-item-button"><i class="fa fa-object-ungroup"></i></div>
+                  <div class="tool-item-button"><i class="fa fa-hand-rock-o"></i></div>
+                </div>
+                <div class="fsc-DocumentName" style="vertical-align: middle;text-align:left;margin-top:3px">Color:</div>
                 <div class="color-select" style="display:inline"></div>
 
             </div>

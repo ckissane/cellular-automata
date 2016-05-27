@@ -146,19 +146,20 @@ div.canvas-cont-big {
 .canvas-cont {
     width:100%;
 
-    height:calc( 100% - 35px );
+    height:calc( 100% - 100px );
     margin:0px;
 
     padding:0px;
     margin-bottom:0px;
 }
-div.canvas-toolbar{
 
-height: 35px;
-}
 div.options-toolbar{
 
 height: 35px;
+}
+div.canvas-toolbar{
+
+height:100px;
 }
 .tool-item{
     display:inline-block;
@@ -400,7 +401,7 @@ font-size: 14px;
 	border-bottom-right-radius: 4px;
 }
 .the-icon img{
-    width:24px;
+    width:44px;
 }
 .the-icon-drive{
     width:26px;
@@ -415,7 +416,7 @@ font-size: 14px;
 }
 .gwt-MenuBar-horizontal {
     height: 36px;
-    margin: 0 24px 0 51px;
+    margin: 0 24px 0 71px;
     outline: none;
     position: relative;
     z-index: 998;
@@ -428,5 +429,28 @@ font-size: 14px;
     line-height:13px;
 }
 .gwt-MenuBar-horizontal{
+
+}
+.menu-popup{
+  position:absolute;
+  display:none;
+}
+.tool-item-button{
+  height:20px;
+  width:20px;
+  border:1px solid grey;
+  margin-left:6px;
+  display:inline-block;
+  text-align: center;
+}
+.tool-item-button i{
+  font-size: 14px;
+    vertical-align: middle;
+    text-align: center;
+}
+.tool-item-row{
+  margin-top:6px;
+  text-align: left;
+
 
 }
