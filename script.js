@@ -737,6 +737,24 @@ function tick() {
             ctx.stroke();
 
 
+    }else{
+    	ctx.beginPath();
+    	ctx.lineWidth=1/zoom;
+            ctx.strokeStyle = "blue";
+            ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
+            ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
+            ctx.stroke();
+
+
+
+
+            ctx.beginPath();
+            ctx.strokeStyle = "yellow";
+            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
+            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
+            ctx.stroke();
+            ctx.lineWidth=1;
+    	
     }
     countCells();
     //findGroups();
