@@ -46,6 +46,8 @@
 var paintColor=1;
 var paintMode=true;
 var toolMode="pencil";
+var selection={on:false,start:{x:0,y:0},end:{x:0,y:0}};
+var pasting=false;
             function startDrag(event) {
                 //console.log("drag");
                 dragging = true;
@@ -89,6 +91,12 @@ var toolMode="pencil";
                 } else {
                     selectColor(0);
                 }
+              }else if(toolMode=="select"){
+selection.on=true;
+selection.start.x=gridX;
+selection.start.y=gridY;
+selection.end.x=gridX;
+selection.end.y=gridY;
               }
                 //console.log(cells);
             }
@@ -124,7 +132,8 @@ function drawWithMouse(x,y){
 
 }
             function drag(event) {
-                if (dragging) {
+
+                if (dragging && !pasting) {
                   var oldMouseX=mouseX+0;
                   var oldMouseY=mouseY+0;
                     mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
@@ -140,10 +149,18 @@ function drawWithMouse(x,y){
                   }else if(toolMode=="move"){
 scrollX-=diff.x/zoom;
 scrollY-=diff.y/zoom;
+                  }else if(toolMode=="select"){
+                    var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
+                    var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
+    selection.end.x=gridX;
+    selection.end.y=gridY;
                   }
                 } else {
                     mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
                     mouseY = (event.pageY - $('#c').offset().top) + $(window).scrollTop();
+                    if(selection.end.x * 10-selection.start.x * 10===0 && selection.end.y * 10-selection.start.y * 10===0){
+                      selection.on=false;
+                    }
                 }
                 //console.log(cells);
             }
@@ -200,7 +217,7 @@ scrollY-=diff.y/zoom;
                     </div>
                 </div>
             </div>
-            <div style="position: absolute; overflow: hidden; left: 0px; top: 29px; right: 250px; height: 35px;">
+            <div style="position: absolute; overflow: visible; left: 0px; top: 29px; right: 250px; height: 35px;">
                 <table cellspacing="0" cellpadding="0" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px;">
                     <tbody>
                         <tr>
@@ -210,8 +227,15 @@ scrollY-=diff.y/zoom;
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File<div class="menu-popup">Save</div></td>
-                                                <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit</td>
+                                                <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File<div class="menu-popup">
+                                                  <div class="menu-popup-item" onclick="savePattern()">Save</div>
+                                                  <div class="menu-popup-item">Open</div>
+                                                </div></td>
+                                                <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit<div class="menu-popup">
+                                                  <div class="menu-popup-item" onclick="cut()">Cut</div>
+                                                  <div class="menu-popup-item">Copy</div>
+                                                  <div class="menu-popup-item" onclick="startPaste()">Paste</div>
+                                                </div></td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-35" role="menuitem" aria-haspopup="true">View</td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-37" role="menuitem" aria-haspopup="true">Help</td>
                                             </tr>

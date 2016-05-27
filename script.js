@@ -28,6 +28,8 @@ var paintColor = 1;
 var dragging = false;
 var queryString = document.URL.indexOf('?')<0?"":document.URL.substring( document.URL.indexOf('?') + 1 );
 var params = document.URL.indexOf('?')<0?{}:parseQueryString(queryString);
+var clipboard=[];
+var clipboardDim={w:0,h:0};
 console.log(params);
 function parseQueryString( queryString ) {
     var params = {}, queries, temp, i, l;
@@ -792,6 +794,16 @@ function tick() {
         }
       }
     }
+    if(selection.on){
+    var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+    var boxX = selectionOrdered.start.x * 10 - scrollX;
+    var boxY =selectionOrdered.start.y * 10 - scrollY;
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0,255,0,0.2)";
+    ctx.fillRect(boxX, boxY, selectionOrdered.end.x * 10-selectionOrdered.start.x * 10+10, selectionOrdered.end.y * 10-selectionOrdered.start.y * 10+10);
+    ctx.fill();
+
+  }
 }
 
 function clearCells() {
@@ -926,3 +938,64 @@ function selectTool(tID){
     $(".tool-item-button[value="+tID+"]").addClass("selected");
     toolMode=tID;
 }
+function cut(){
+  stop();
+  if(selection.on){
+  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
+  clipboard=[];
+  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+
+    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+  if(cells["POS" + x + "_" + y]){
+    if(cells["POS" + x + "_" + y].s!==0){
+      var c=cells["POS" + x + "_" + y];
+      clipboard.push(c);
+      clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
+      clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
+      delete cells["POS" + x + "_" + y];
+    }
+  }
+    }
+  }
+
+}
+
+
+}
+function startPaste(){
+  stop();
+  if(!pasting){
+  pasting=true;
+}
+}
+function paste(){
+  stop();
+  pasting=false;
+  var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
+  var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
+  selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
+  if(selection.on){
+  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+/*  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+  if(cells["POS" + x + "_" + y]){
+    if(cells["POS" + x + "_" + y].s!==0){
+
+      delete cells["POS" + x + "_" + y];
+    }
+  }
+    }
+  }
+*/
+
+  for(var i=0;i<clipboard.length;i++){
+
+
+
+      clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
+      clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
+addCell(clipboard[i].x,clipboard[i].y,clipboard[i].s);
+    }
+  }
+    }
