@@ -390,15 +390,16 @@ function clone(obj) {
     return copy;
 }
 
-if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
+if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() == "") {
         Rule = eval($("#rules").val());
 
         var brush = 0;
-        $(".color-select").html("");
+        $(".tool-item-state-selection").html("");
         var colors = ["black"].concat(Rule.colors);
         for (var i = 0; i < colors.length; i++) {
-            console.log(colors);
-            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+            //console.log(colors);
+            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
+
         }
     }
 //updateRules();
@@ -868,16 +869,19 @@ function cloneObject(obj) {
 }
 function selectRule() {
     //$("#rule-area") = $("#rules").value;
-    if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
+    if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() == "") {
         Rule = eval($("#rules").val());
 
         var brush = 0;
-        $(".color-select").html("");
+        $(".tool-item-state-selection").html("");
         var colors = ["black"].concat(Rule.colors);
         for (var i = 0; i < colors.length; i++) {
             //console.log(colors);
-            var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
+
+            //var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
         }
+        paintColor=1;
     }
     if(params.rule!=$("#rules").val()){
         var newSearch="";
@@ -911,4 +915,9 @@ for (var cell in cells) {
         }
     }
     console.log(cellArray);
+}
+function selectColor(cID){
+    $(".state-column").removeClass("selected");
+    $(".state-column[value="+cID+"]").addClass("selected");
+    paintColor=cID;
 }

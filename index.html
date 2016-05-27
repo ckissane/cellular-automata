@@ -43,7 +43,8 @@
             var mouseX = 0;
             var mouseY = 0;
 
-
+var paintColor=1;
+var paintMode=true;
             function startDrag(event) {
                 //console.log("drag");
                 dragging = true;
@@ -52,25 +53,27 @@
                 var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
                 var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
                 if (cells["POS" + gridX + "_" + gridY] != null) {
-                    if (cells["POS" + gridX + "_" + gridY].s == Rule.states - 1) {
+                    if (cells["POS" + gridX + "_" + gridY].s === paintColor) {
                         // cells[gridX+","+gridY]=null;
                         delete cells["POS" + gridX + "_" + gridY];
-                        paintColor = 0;
+
+                        paintMode=false;
                     } else if (cells["POS" + gridX + "_" + gridY].s != 0) {
                         cells["POS" + gridX + "_" + gridY] = {
                             x: gridX,
                             y: gridY,
                             s: cells["POS" + gridX + "_" + gridY].s + 1
                         };
-                        paintColor = cells["POS" + gridX + "_" + gridY].s;
+                        paintMode=true;
+
                     }
                 } else {
                     cells["POS" + gridX + "_" + gridY] = {
                         x: gridX,
                         y: gridY,
-                        s: 1
+                        s: paintColor
                     };
-                    paintColor = 1;
+                    paintMode=true;
                 }
                 //console.log(cells);
             }
@@ -82,7 +85,7 @@ function drawWithMouse(x,y){
       if (cells["POS" + gridX + "_" + gridY] != null) {
 
 
-          if (paintColor == 0) {
+          if (paintColor === 0 || (!paintMode)) {
               delete cells["POS" + gridX + "_" + gridY];
           } else {
               cells["POS" + gridX + "_" + gridY] = {
@@ -93,7 +96,7 @@ function drawWithMouse(x,y){
           }
 
       } else {
-          if (paintColor == 0) {
+          if (paintColor === 0 || (!paintMode)) {
 
           } else {
               cells["POS" + gridX + "_" + gridY] = {
@@ -280,13 +283,16 @@ function drawWithMouse(x,y){
             <div class="fs-Toolbar options-toolbar canvas-toolbar" style="overflow:hidden">
               <div class="tool-item-row">
                   <div class="tool-item-button play-pause-button" onclick="toggleCalc()"><i class="fa fa-play"></i><i class="fa fa-pause"></i></div>
-                  <div class="tool-item-button"><i class="fa fa-pencil"></i></div>
-                  <div class="tool-item-button"><i class="fa fa-eyedropper"></i></div>
-                  <div class="tool-item-button"><i class="fa fa-object-ungroup"></i></div>
-                  <div class="tool-item-button"><i class="fa fa-hand-rock-o"></i></div>
+                  <div class="tool-item-button selected" value="draw"><i class="fa fa-pencil"></i></div>
+                  <div class="tool-item-button" value="pick"><i class="fa fa-eyedropper"></i></div>
+                  <div class="tool-item-button" value="select"><i class="fa fa-object-ungroup"></i></div>
+                  <div class="tool-item-button" value="move"><i class="fa fa-hand-rock-o"></i></div>
                 </div>
-                <div class="fsc-DocumentName" style="vertical-align: middle;text-align:left;margin-top:3px">Color:</div>
-                <div class="color-select" style="display:inline"></div>
+                  <div class="tool-item-row">
+                    <div class="tool-item-label-column"><div class="label">State:</div><div class="label">Color:</div></div>
+                    <div class="tool-item-state-selection"></div>
+                  </div>
+
 
             </div>
             <div class="canvas-cont">
