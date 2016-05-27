@@ -450,6 +450,13 @@ if (Rule != eval($("#rules").val()) || $(".color-select").html() == "") {
 // germ2 ?cells=0,0;0,1;1,0;1,1;2,0;2,1;3,0;3,1;4,0;4,1;5,0;5,1
 
 // Virus ?cells=0,0;0,1;1,0;1,1;2,0;2,1;6,0;6,1;4,0;4,1;5,0;5,1
+
+
+//var x=0;for(var y=0;y<10;y++){for(var z=0;z<20;z++){x++;addCell(x,y,1)}}
+//var x=6;for(var y=0;y<12;y++){x-=12;for(var z=0;z<12;z++){x++;if((Math.max(Math.abs(x),Math.abs(y-6))%2+2)%2==1){addCell(x,y,1)}}}
+//var x=61;for(var y=0;y<=122;y++){x-=123;for(var z=0;z<=122;z++){x++;if((Math.max(Math.abs(x),Math.abs(y-61))%2+2)%2==1){addCell(x,y,1)}}}
+//var x=101;for(var y=0;y<=202;y++){x-=202;for(var z=0;z<=202;z++){x++;if((Math.max(Math.abs(x),Math.abs(y-101))%3+3)%3==1){addCell(x,y,1)}}}
+//var x=101;for(var y=0;y<=202;y++){x-=203;for(var z=0;z<=202;z++){x++;if((Math.sqrt(Math.pow(x,2)+Math.pow(y-101,2))%3+3)%3<1){addCell(x,y,1)}}}
 var cellQ = params.cells;
 if(cellQ!==undefined && cellQ!==null){
   var b=params.base;
@@ -688,10 +695,10 @@ function tick() {
     var floorSY = scrollY - scrollY % 10;
     if (zoom > Math.pow(1.5, -3)) {
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
-            if (x != 1) {
+            if (x != 0) {
                 ctx.strokeStyle = "white";
             } else {
-                ctx.strokeStyle = "white";
+                ctx.strokeStyle = "blue";
             }
             ctx.beginPath();
             ctx.moveTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
@@ -706,7 +713,7 @@ function tick() {
             if (y != 0) {
                 ctx.strokeStyle = "white";
             } else {
-                ctx.strokeStyle = "white";
+                ctx.strokeStyle = "yellow";
             }
         }
     }
@@ -772,8 +779,8 @@ function randomCells() {
         Rule.random();
     } else {
         for (var i = 0; i < 500+Math.random()*120; i++) {
-          var gridX = Math.floor(Math.random() * 8)*55 +Math.floor(Math.random() * 6) - 55*4;
-          var gridY = Math.floor(Math.random() * 8)*55 +Math.floor(Math.random() * 6) - 55*4;
+          var gridX = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
+          var gridY = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
             var state = Math.floor(Math.random() * 1) + 1
             cells["POS" + gridX + "_" + gridY] = {
                 x: gridX,
