@@ -137,6 +137,9 @@ function drawWithMouse(x,y){
                     }
                   }else if(toolMode=="pick"){
 
+                  }else if(toolMode=="move"){
+scrollX-=diff.x/zoom;
+scrollY-=diff.y/zoom;
                   }
                 } else {
                     mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
