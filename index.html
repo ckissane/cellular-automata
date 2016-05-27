@@ -2,7 +2,8 @@
 <html>
 
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="jquery-1.12.4.min.js"></script>
+        <script src="mousetrap.min.js"></script>
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="Celly.css" rel="stylesheet">
         <script src="Filesaver.js"></script>
@@ -169,6 +170,12 @@ scrollY-=diff.y/zoom;
                 mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
                 mouseY = (event.pageY - $('#c').offset().top) + $(window).scrollTop();
             }
+            function mouseUp(){
+              if (pasting) {
+                paste();
+              }
+              dragging=false;
+            }
         </script>
         <script src="https://www.google.com/jsapi?key=PUT_YOUR_API_KEY_HERE"></script>
         <script src="https://apis.google.com/js/client.js?onload=initPicker"></script>
@@ -233,7 +240,7 @@ scrollY-=diff.y/zoom;
                                                 </div></td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit<div class="menu-popup">
                                                   <div class="menu-popup-item" onclick="cut()">Cut</div>
-                                                  <div class="menu-popup-item">Copy</div>
+                                                  <div class="menu-popup-item" onclick="copy()">Copy</div>
                                                   <div class="menu-popup-item" onclick="startPaste()">Paste</div>
                                                 </div></td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-35" role="menuitem" aria-haspopup="true">View</td>
@@ -342,7 +349,7 @@ scrollY-=diff.y/zoom;
 
             </div>
             <div class="canvas-cont">
-                <canvas id="c" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="dragging=false" onmouseleave="dragging=false"></canvas>
+                <canvas id="c" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="mouseUp()" onmouseleave="mouseUp()"></canvas>
             </div>
         </div>
 

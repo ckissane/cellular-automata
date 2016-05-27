@@ -804,6 +804,21 @@ function tick() {
     ctx.fill();
 
   }
+  if(pasting){
+    var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
+    var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
+    selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
+    for(var i=0;i<clipboard.length;i++){
+      var boxX = (clipboard[i].x+selectionOrdered.start.x) * 10 - scrollX;
+      var boxY = (clipboard[i].y+selectionOrdered.start.y) * 10 - scrollY;
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(0,255,0,0.2)";
+      ctx.fillRect(boxX, boxY, 10,10);
+      ctx.fill();
+
+
+    }
+}
 }
 
 function clearCells() {
@@ -963,6 +978,31 @@ clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrd
 
 
 }
+function copy(){
+  stop();
+  if(selection.on){
+  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
+  clipboard=[];
+  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+
+    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+  if(cells["POS" + x + "_" + y]){
+    if(cells["POS" + x + "_" + y].s!==0){
+      var c=cells["POS" + x + "_" + y];
+      clipboard.push(clone(c));
+      clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
+      clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
+
+    }
+  }
+    }
+  }
+
+}
+
+
+}
 function startPaste(){
   stop();
   if(!pasting){
@@ -993,9 +1033,21 @@ function paste(){
 
 
 
-      clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
-      clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
-addCell(clipboard[i].x,clipboard[i].y,clipboard[i].s);
+      //clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
+      //clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
+addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.start.y,clipboard[i].s);
     }
   }
     }
+    Mousetrap.bind(['command+c', 'ctrl+c'], function(e) {
+        copy();
+        return false;
+    });
+    Mousetrap.bind(['command+x', 'ctrl+x'], function(e) {
+        cut();
+        return false;
+    });
+    Mousetrap.bind(['command+v', 'ctrl+v'], function(e) {
+        startPaste();
+        return false;
+    });
