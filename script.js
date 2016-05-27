@@ -695,10 +695,10 @@ function tick() {
     var floorSY = scrollY - scrollY % 10;
     if (zoom > Math.pow(1.5, -3)) {
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
-            if (x != 0) {
+            if (x !== 1) {
                 ctx.strokeStyle = "white";
             } else {
-                ctx.strokeStyle = "blue";
+                ctx.strokeStyle = "white";
             }
             ctx.beginPath();
             ctx.moveTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
@@ -710,12 +710,33 @@ function tick() {
             ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
             ctx.stroke();
-            if (y != 0) {
+            if (y !== 0) {
                 ctx.strokeStyle = "white";
             } else {
-                ctx.strokeStyle = "yellow";
+                ctx.strokeStyle = "white";
             }
         }
+    }
+    if (zoom > Math.pow(1.5, -3)) {
+
+
+
+            ctx.beginPath();
+            ctx.strokeStyle = "blue";
+            ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
+            ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
+            ctx.stroke();
+
+
+
+
+            ctx.beginPath();
+            ctx.strokeStyle = "yellow";
+            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 0 * 10);
+            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 0 * 10);
+            ctx.stroke();
+
+
     }
     countCells();
     //findGroups();
