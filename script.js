@@ -717,7 +717,7 @@ function tick() {
             }
         }
     }
-    if (zoom > Math.pow(1.5, -3)) {
+    if (zoom > Math.pow(1.5, -3) || true) {
 
 
 
