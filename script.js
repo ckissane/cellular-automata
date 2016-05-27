@@ -921,3 +921,8 @@ function selectColor(cID){
     $(".state-column[value="+cID+"]").addClass("selected");
     paintColor=cID;
 }
+function selectTool(tID){
+    $(".tool-item-button").removeClass("selected");
+    $(".tool-item-button[value="+tID+"]").addClass("selected");
+    toolMode=tID;
+}
