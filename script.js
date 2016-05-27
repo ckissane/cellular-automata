@@ -503,6 +503,7 @@ function toggleCalc() {
 function stop() {
     inToggle = true;
     $('#run-toggle').bootstrapToggle('off');
+    $('.play-pause-button').removeClass("playing");
     if (!running) {
 
     } else {
@@ -516,6 +517,7 @@ function stop() {
 function start() {
     inToggle = true;
     $('#run-toggle').bootstrapToggle('on');
+    $('.play-pause-button').addClass("playing");
     if (!running) {
         selectRule();
         //$(".rule-script").html($(".rule-area").val());
@@ -754,7 +756,7 @@ function tick() {
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.stroke();
             ctx.lineWidth=1;
-    	
+
     }
     countCells();
     //findGroups();

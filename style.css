@@ -454,3 +454,12 @@ font-size: 14px;
 
 
 }
+.play-pause-button .fa-pause{
+display:none ;
+}
+.play-pause-button.playing .fa-play{
+display:none;
+}
+.play-pause-button.playing .fa-pause{
+display:inline-block;
+}
