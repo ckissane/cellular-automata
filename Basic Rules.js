@@ -330,7 +330,7 @@ var PersianCarpet = {
 };
 var ColeRule = {
     ruleName: "ColeRule",
-    colors: ["white", "grey", "yellow", "green"],
+    colors: ["white", "pink", "yellow", "green"],
     states: 5,
     neighborsForCell: function(cell, cellset) {
         var neighbors = [];

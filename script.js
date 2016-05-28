@@ -30,7 +30,7 @@ var queryString = document.URL.indexOf('?')<0?"":document.URL.substring( documen
 var params = document.URL.indexOf('?')<0?{}:parseQueryString(queryString);
 var clipboard=[];
 var clipboardDim={w:0,h:0};
-console.log(params);
+//console.log(params);
 function parseQueryString( queryString ) {
     var params = {}, queries, temp, i, l;
 
@@ -48,6 +48,8 @@ function parseQueryString( queryString ) {
 if(params.rule){
     if($('option[value="'+params.rule+'"]')[0]){
         $("#rules").val(params.rule);
+    }else{
+      params.rule="ExtendedMooreB4S4";
     }
 }else{
   params.rule="ExtendedMooreB4S4";
@@ -146,112 +148,7 @@ function convertFromBaseToBase(str, fromBase, toBase){
 }
 //Convert number in string representation from base:from to base:to.
 //Return result as a string
-function Convert(fromBase, to,  s)
-{
-    //Return error if input is empty
-    if (s.length<1||s===null)
-    {
-        return ("Error: Nothing in Input String");
-    }
-    //only allow uppercase input characters in string
-    s = s.toUpperCase();
 
-    //only do base 2 to base 36 (digit represented by characters 0-Z)"
-    if (fromBase < 2 || fromBase > 36 || to < 2 || to > 36)
-    { return ("Base requested outside range"); }
-
-    //convert string to an array of integer digits representing number in base:fromBase
-    var il = s.length;
-    var fs = [];//new int[il];
-    for(var i=0;i<il;i++){
-fs.push(0);
-    }
-    var k = 0;
-    for (var i = s.length - 1; i >= 0; i--)
-    {
-        if (s[i].charCodeAt(0) >= '0'.charCodeAt(0) && s[i].charCodeAt(0) <= '9'.charCodeAt(0)) { fs[k++] = s[i].charCodeAt(0) - '0'.charCodeAt(0); }
-        else
-        {
-            if (s[i].charCodeAt(0) >= 'A'.charCodeAt(0) && s[i].charCodeAt(0) <= 'Z'.charCodeAt(0)) { fs[k++] = 10 + s[i].charCodeAt(0) - 'A'.charCodeAt(0); }
-            else
-            { return ("Error: Input string must only contain any of 0-9 or A-Z"); } //only allow 0-9 A-Z characters
-        }
-    }
-console.log(fs);
-    //check the input for digits that exceed the allowable for base:fromBase
-    for(var i =0;i<fs.length;i++)
-    {
-        if (fs[i] >= fromBase) { return ("Error: Not a valid number for this input base"); }
-    }
-
-    //find how many digits the output needs
-    var ol = il * (fromBase / to+1);
-    var ts = [];//new int[ol+10]; //assign accumulation array
-    var cums = []//new int[ol+10]; //assign the result array
-    for(var i=0;i<ol+10;i++){
-ts.push(0);
-cums.push(0);
-    }
-    ts[0] = 1; //initialize array with number 1
-
-    //evaluate the output
-    for (var i = 0; i < il; i++) //for each input digit
-    {
-        for (var j = 0; j < ol; j++) //add the input digit
-            // times (base:to fromBase^i) to the output cumulator
-        {
-            cums[j] += ts[j] * fs[i];
-            var temp = cums[j];
-            var rem = 0;
-            var ip = j;
-            do // fix up any remainders in base:to
-            {
-                rem = temp / to;
-                cums[ip] = temp-rem*to; ip++;
-                cums[ip] += rem;
-                temp = cums[ip];
-            }
-            while (temp >=to);
-        }
-
-        //calculate the next power fromBase^i) in base:to format
-        for (var j = 0; j < ol; j++)
-        {
-            ts[j] = ts[j] * fromBase;
-        }
-        for(var j=0;j<ol;j++) //check for any remainders
-        {
-            var temp = ts[j];
-            var rem = 0;
-            var ip = j;
-            do  //fix up any remainders
-            {
-                rem = temp / to;
-                ts[ip] = temp - rem * to; ip++;
-                ts[ip] += rem;
-                temp = ts[ip];
-            }
-            while (temp >= to);
-        }
-    }
-
-    //convert the output to string format (digits 0,to-1 converted to 0-Z characters)
-  var sout = ""; //initialize output string
-    var first = false; //leading zero flag
-    console.log(cums);
-    for (var i = ol ; i >= 0; i--)
-    {
-        if (cums[i] != 0) { first = true; }
-        if (!first) { continue; }
-        if (cums[i] < 10) { sout += String.fromCharCode(cums[i] + '0'.charCodeAt(0)); }//String.fromCharCode(cums[i] + '0'.charCodeAt(0)); }
-        else { sout += String.fromCharCode(cums[i] + 'A'.charCodeAt(0)-10); }
-    }
-    console.log(sout.length);
-    console.log(sout);
-    if (sout.length<1||sout===null) { return "0"; } //input was zero, return 0
-    //return the converted string
-    return sout;
-}
 function loadSave(x) {
     clearCells();
     var cellList = x.split("|");
@@ -270,7 +167,7 @@ function submitpat() {
     clearCells();
     var x = $("#inputTextToSave").val();
   //  console.log(convertToHash(x));
-    console.log(convertFromHash(convertToHash(x)));
+    //console.log(convertFromHash(convertToHash(x)));
     //x=convertFromHash(convertToHash(x));
     var cellList = x.split("|");
     for (var i = 0; i < cellList.length; i++) {
@@ -536,7 +433,7 @@ function start() {
 
 function calc() {
     generations++;
-    console.log(generations)
+    //console.log(generations)
     $(".cell-gen").html(" Generation: " + generations);
     var oldSet = clone(cells);
     var toCalc = {};
@@ -700,34 +597,32 @@ function tick() {
     var floorSY = scrollY - scrollY % 10;
     if (zoom > Math.pow(1.5, -3)) {
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
-            if (x !== 1) {
-                ctx.strokeStyle = "white";
-            } else {
-                ctx.strokeStyle = "white";
-            }
+
+                
+
             ctx.beginPath();
+            ctx.lineWidth=1/zoom;
             ctx.moveTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
             ctx.lineTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
+            ctx.strokeStyle = "grey";
             ctx.stroke();
         }
         for (var y = -Math.ceil(h / zoom / 20) - 2; y < Math.ceil(h / zoom / 20) + 2; y++) {
             ctx.beginPath();
+            ctx.lineWidth=1/zoom;
             ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
+            ctx.strokeStyle = "grey";
             ctx.stroke();
-            if (y !== 0) {
-                ctx.strokeStyle = "white";
-            } else {
-                ctx.strokeStyle = "white";
-            }
+
         }
     }
     if (zoom > Math.pow(1.5, -3) || true) {
 
 
-
+            ctx.lineWidth=1/zoom;
             ctx.beginPath();
-            ctx.strokeStyle = "blue";
+            ctx.strokeStyle = "pink";
             ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
             ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
             ctx.stroke();
@@ -736,29 +631,11 @@ function tick() {
 
 
             ctx.beginPath();
-            ctx.strokeStyle = "yellow";
+            ctx.strokeStyle = "pink";
             ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.stroke();
 
-
-    }else{
-    	ctx.beginPath();
-    	ctx.lineWidth=1/zoom;
-            ctx.strokeStyle = "blue";
-            ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
-            ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
-            ctx.stroke();
-
-
-
-
-            ctx.beginPath();
-            ctx.strokeStyle = "yellow";
-            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
-            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
-            ctx.stroke();
-            ctx.lineWidth=1;
 
     }
     countCells();
@@ -829,6 +706,7 @@ function clearCells() {
             delete cells[cell];
         }
     }
+    generations=0;
 }
 
 function countCells() {
@@ -872,7 +750,28 @@ function test() {
     $("#inputTextToSave")[0].value = $("#selector")[0].value;
     $(".fsc-EditableDocumentName").html = $("#selector")[0].innerHtml;
 }
+function loadAndOpenFile() {
+    var fileToLoad = $("input#file-open-input")[0].files[0];
 
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        //$("#inputTextToSave")[0].value = textFromFileLoaded;
+        clearCells();
+
+        var x = textFromFileLoaded;//$("#inputTextToSave").val();
+      //  console.log(convertToHash(x));
+        //console.log(convertFromHash(convertToHash(x)));
+        //x=convertFromHash(convertToHash(x));
+        var cellList = x.split("|");
+        for (var i = 0; i < cellList.length; i++) {
+            var element = cellList[i].split(",");
+            addCell(parseInt(element[0]), parseInt(element[1]), parseInt(element[2]));
+        }
+
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
 function loadFileAsText() {
     var fileToLoad = $(".fileupload input")[0].files[0];
 

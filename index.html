@@ -234,7 +234,7 @@ scrollY-=diff.y/zoom;
                                             <tr>
                                                 <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File<div class="menu-popup">
                                                   <div class="menu-popup-item" onclick="savePattern()">Save</div>
-                                                  <div class="menu-popup-item">Open</div>
+                                                  <div class="menu-popup-item" onclick="document.getElementById('file-open-input').click()">Open<input id="file-open-input" type="file" onchange="loadAndOpenFile()"></div>
                                                 </div></td>
                                                 <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit<div class="menu-popup">
                                                   <div class="menu-popup-item" onclick="cut()">Cut</div>
