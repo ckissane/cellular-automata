@@ -598,7 +598,7 @@ function tick() {
     if (zoom > Math.pow(1.5, -3)) {
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
 
-                
+
 
             ctx.beginPath();
             ctx.lineWidth=1/zoom;
@@ -877,6 +877,27 @@ clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrd
 
 
 }
+function clearSelected(){
+  stop();
+  if(selection.on){
+  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+
+  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+
+    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+  if(cells["POS" + x + "_" + y]){
+    if(cells["POS" + x + "_" + y].s!==0){
+      var c=cells["POS" + x + "_" + y];
+
+      delete cells["POS" + x + "_" + y];
+    }
+  }
+    }
+  }
+
+  }
+
+}
 function copy(){
   stop();
   if(selection.on){
@@ -950,11 +971,23 @@ addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.
         startPaste();
         return false;
     });
+    Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
+        savePattern();
+        return false;
+    });
+    Mousetrap.bind(['command+o', 'ctrl+o'], function(e) {
+        loadAndOpenFile();
+        return false;
+    });
     Mousetrap.bind('enter', function(e) {
         toggleCalc();
         return false;
     });
     Mousetrap.bind('space', function(e) {
         calc();
+        return false;
+    });
+    Mousetrap.bind(['delete', 'backspace'], function(e) {
+        clearSelected();
         return false;
     });
