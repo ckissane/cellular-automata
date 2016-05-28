@@ -47,6 +47,7 @@ function parseQueryString( queryString ) {
 };
 if(params.rule){
     if($('option[value="'+params.rule+'"]')[0]){
+
         $("#rules").val(params.rule);
     }else{
       params.rule="ExtendedMooreB4S4";
@@ -811,7 +812,7 @@ function selectRule() {
         paintColor=1;
     }
     if(params.rule!=$("#rules").val()){
-      params.rule==$("#rules").val();
+      params.rule=$("#rules").val();
         var newSearch="";
         var paramList=[];
         for(var i in params){
