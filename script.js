@@ -810,6 +810,7 @@ function selectRule() {
         paintColor=1;
     }
     if(params.rule!=$("#rules").val()){
+      params.rule==$("#rules").val();
         var newSearch="";
         var paramList=[];
         for(var i in params){
