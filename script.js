@@ -487,11 +487,11 @@ s=parseInt(xy[2],b);
 //(".rule-script").html($(".rule-area").val());
 window.setInterval(tick, 1);
 
-$('#run-toggle').change(function() {
+/*$('#run-toggle').change(function() {
     if (!inToggle) {
         toggleCalc();
     }
-});
+});*/
 
 function toggleCalc() {
 
@@ -505,7 +505,7 @@ function toggleCalc() {
 
 function stop() {
     inToggle = true;
-    $('#run-toggle').bootstrapToggle('off');
+    //$('#run-toggle').bootstrapToggle('off');
     $('.play-pause-button').removeClass("playing");
     if (!running) {
 
@@ -519,7 +519,7 @@ function stop() {
 
 function start() {
     inToggle = true;
-    $('#run-toggle').bootstrapToggle('on');
+    //$('#run-toggle').bootstrapToggle('on');
     $('.play-pause-button').addClass("playing");
     if (!running) {
         selectRule();
@@ -1049,5 +1049,13 @@ addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.
     });
     Mousetrap.bind(['command+v', 'ctrl+v'], function(e) {
         startPaste();
+        return false;
+    });
+    Mousetrap.bind('enter', function(e) {
+        toggleCalc();
+        return false;
+    });
+    Mousetrap.bind('space', function(e) {
+        calc();
         return false;
     });
