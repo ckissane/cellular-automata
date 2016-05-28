@@ -140,7 +140,8 @@ function makehash(){
   var loc="?"+paramList.join("&");
   var current=document.location.href;
   var stateObj = {  current: loc };
-  history.pushState(stateObj, "Super Cellular Automata", loc);
+    window.location.search = loc;
+  //history.pushState(stateObj, "Super Cellular Automata", loc);
 }
 function convertFromBaseToBase(str, fromBase, toBase){
 	var num = parseInt(str, fromBase);
@@ -828,7 +829,8 @@ function selectRule() {
         var loc="?"+paramList.join("&");
         var current=document.location.href;
         var stateObj = {  current: loc };
-        history.pushState(stateObj, "Super Cellular Automata", loc);
+          window.location.search = loc;
+        //history.pushState(stateObj, "Super Cellular Automata", loc);
         //history.pushState({}, loc, loc);
        // window. = paramList.join("&");
     }
