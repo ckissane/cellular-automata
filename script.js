@@ -624,7 +624,7 @@ function tick() {
 
             ctx.lineWidth=1/zoom;
             ctx.beginPath();
-            ctx.strokeStyle = "pink";
+            ctx.strokeStyle = "#00ACDB";
             ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
             ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
             ctx.stroke();
@@ -633,7 +633,7 @@ function tick() {
 
 
             ctx.beginPath();
-            ctx.strokeStyle = "pink";
+            ctx.strokeStyle = "#00ACDB";
             ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
             ctx.stroke();

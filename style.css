@@ -464,8 +464,8 @@ background:#eee;
   text-align: center;
 }
 .tool-item-button.selected{
-  border:1px solid blue;
-  color:blue;
+  border:1px solid #00ACDB;
+  color:#00ACDB;
 
 }
 .tool-item-button i{
@@ -515,7 +515,7 @@ padding-right: 4px;
   border:1px solid transparent;
 }
 .tool-item-state-selection .state-column.selected{
-  border:1px solid blue;
+  border:1px solid #00ACDB;
 
 }
 .tool-item-state-selection .state-column .label{
