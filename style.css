@@ -456,10 +456,11 @@ background:#eee;
 }
 .tool-item-button{
           box-sizing: content-box;
-  height:20px;
+  height:19.5px;
   width:20px;
   border:1px solid grey;
   margin-left:6px;
+  padding-top:0.5px;
   display:inline-block;
   text-align: center;
 }
