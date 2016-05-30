@@ -223,7 +223,26 @@ function MouseWheelHandler(e) {
     scrollY += -(newPGridY - pGridY) * 10;
     //onwheel(e);
 }
+function zoomOut(){
+    zoom = zoom * Math.pow(1.5, -1);
 
+    if (zoom < Math.pow(1.5, -16)) {
+        zoom = Math.pow(1.5, -16);
+    }
+    if (zoom > Math.pow(1.5, 6)) {
+        zoom = Math.pow(1.5, 6);
+    }
+}
+function zoomIn(){
+    zoom = zoom * Math.pow(1.5, 1);
+
+    if (zoom < Math.pow(1.5, -16)) {
+        zoom = Math.pow(1.5, -16);
+    }
+    if (zoom > Math.pow(1.5, 6)) {
+        zoom = Math.pow(1.5, 6);
+    }
+}
 function onwheel(e) {
     var deltaY = 0;
 
@@ -736,6 +755,31 @@ function randomCells() {
                 y: gridY,
                 s: state
             };
+        }
+    }
+}
+function randomFill() {
+    clearSelected();
+    if(selection.on){
+
+
+
+        if (Rule.randomFill != null) {
+            Rule.randomFill();
+        } else {
+            var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+            clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
+
+            for (var i = 0; i < Math.ceil(clipboardDim.w*clipboardDim.h/4); i++) {
+                var gridX = selectionOrdered.start.x+Math.floor(Math.random()*clipboardDim.w ) ;
+                var gridY =selectionOrdered.start.y+Math.floor(Math.random()*clipboardDim.h ) ;
+                var state = Math.floor(Math.random() * 1) + 1
+                cells["POS" + gridX + "_" + gridY] = {
+                    x: gridX,
+                    y: gridY,
+                    s: state
+                };
+            }
         }
     }
 }

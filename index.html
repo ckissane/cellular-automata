@@ -335,35 +335,47 @@
         <div class="tool-item-row">
             <div class="btn-group tool-item-group">
                 <button type="button" class="btn btn-default play-pause-button" onclick="toggleCalc()">
-                    <i class="fa fa-play"></i><i class="fa fa-pause"></i></button>
-                    <button type="button" class="btn btn-default selected" value="pencil" onclick="selectTool('pencil')">
-                        <i class="fa fa-pencil"></i></button>
-                        <button type="button" class="btn btn-default" value="pick" onclick="selectTool('pick')"><i class="fa fa-eyedropper"></i></button>
-                        <button type="button" class="btn btn-default" value="select" onclick="selectTool('select')"><i class="fa fa-object-ungroup"></i></button>
-                        <button type="button" class="btn btn-default" value="move" onclick="selectTool('move')"><i class="fa fa-hand-rock-o"></i></button>
-                        <button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;">
-                            <i class="fa fa-crosshairs" aria-hidden="true"></i></button>
-                        </div>
+                    <i class="fa fa-play"></i><i class="fa fa-pause"></i>
+                </button>
+            </div>
+            <div class="btn-group tool-item-group">
 
-                    </div>
-                    <div class="tool-item-row">
-                        <div class="tool-item-label-column"><div class="label">State:</div><div class="label">Color:</div></div>
-                        <div class="tool-item-state-selection"></div>
-                    </div>
+                <button type="button" class="btn btn-default selected" value="pencil" onclick="selectTool('pencil')"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-default" value="pick" onclick="selectTool('pick')"><i class="fa fa-eyedropper"></i></button>
+                <button type="button" class="btn btn-default" value="select" onclick="selectTool('select')"><i class="fa fa-object-ungroup"></i></button>
+                <button type="button" class="btn btn-default" value="move" onclick="selectTool('move')"><i class="fa fa-hand-rock-o"></i></button>
+            </div>
+            <div class="btn-group tool-item-group">
+                <button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;"><i class="fa fa-map-marker"></i></button>
+                <!--button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;">
 
-
-                </div>
-                <div class="canvas-cont">
-                    <canvas id="c" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="mouseUp()" onmouseleave="mouseUp()"></canvas>
-                </div>
+                <i class="fa fa-crosshairs" aria-hidden="true"></i></button-->
+                <button type="button" class="btn btn-default" onclick="randomFill()"><i class="fa fa-random"></i></button>
+            </div>
+            <div class="btn-group tool-item-group">
+                <button type="button" class="btn btn-default" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button>
+                <button type="button" class="btn btn-default" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button>
             </div>
 
-            <script src="Basic Rules.js"></script>
-            <script src="script.js">
+        </div>
+        <div class="tool-item-row">
+            <div class="tool-item-label-column"><div class="label">State:</div><div class="label">Color:</div></div>
+            <div class="tool-item-state-selection"></div>
+        </div>
 
-            </script>
-            <script class="rule-script"></script>
 
-        </body>
+    </div>
+    <div class="canvas-cont">
+        <canvas id="c" onmousedown="startDrag(event)" onmousemove="drag(event)" onmouseup="mouseUp()" onmouseleave="mouseUp()"></canvas>
+    </div>
+</div>
 
-        </html>
+<script src="Basic Rules.js"></script>
+<script src="script.js">
+
+</script>
+<script class="rule-script"></script>
+
+</body>
+
+</html>
