@@ -19,7 +19,7 @@ var mscrollX = 0;
 var mscrollY = 0;
 var scrollX = 0;
 var scrollY = 0;
-var zoom = Math.pow(1.5, -3);
+var zoom = Math.pow(1.5, -2);
 var color = 0;
 var inToggle = false;
 var running = false;
@@ -727,7 +727,10 @@ function clearCells() {
             delete cells[cell];
         }
     }
+    scrollX=0;
+    scrollY=0;
     generations=0;
+    zoom = Math.pow(1.5, -2);
     //console.log(generations)
     $(".cell-gen").html(" Generation: " + generations);
 }
