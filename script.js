@@ -50,102 +50,102 @@ if(params.rule){
 
         $("#rules").val(params.rule);
     }else{
-      params.rule="ExtendedMooreB4S4";
+        params.rule="ExtendedMooreB4S4";
     }
 }else{
-  params.rule="ExtendedMooreB4S4";
+    params.rule="ExtendedMooreB4S4";
 }
 function convertFromHash(hash){
-  var largeNumber=0;
-  var out="";
-  var key=["0","1","2","3","4","5","6","7","8","9","A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Z"];
-  var outKey=["0","1","2","3","4","5","6","7","8","9","|",",","-"];
-  out=convertFromBaseToBase(hash,36,13);
-  out=out.toUpperCase();
-  out=out.replace(/A/g,"|");
-  out=out.replace(/B/g,",");
-  out=out.replace(/C/g,"-");
-  return out;
+    var largeNumber=0;
+    var out="";
+    var key=["0","1","2","3","4","5","6","7","8","9","A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Z"];
+    var outKey=["0","1","2","3","4","5","6","7","8","9","|",",","-"];
+    out=convertFromBaseToBase(hash,36,13);
+    out=out.toUpperCase();
+    out=out.replace(/A/g,"|");
+    out=out.replace(/B/g,",");
+    out=out.replace(/C/g,"-");
+    return out;
 }
 function convertToHash(data){
-  var largeNumber=0;
-  var out="";
-  var outKey=["0","1","2","3","4","5","6","7","8","9","A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Z"];
-  var key=["0","1","2","3","4","5","6","7","8","9","|",",","-"];
-  console.log("hashing:");
-  console.log(data);
-  var holder=0;
-  for(var i = 0;i<data.length;i++) {
-    holder=holder*key.length;
-holder+=key.indexOf(data[i]);
+    var largeNumber=0;
+    var out="";
+    var outKey=["0","1","2","3","4","5","6","7","8","9","A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "Z"];
+    var key=["0","1","2","3","4","5","6","7","8","9","|",",","-"];
+    console.log("hashing:");
+    console.log(data);
+    var holder=0;
+    for(var i = 0;i<data.length;i++) {
+        holder=holder*key.length;
+        holder+=key.indexOf(data[i]);
 
-  }
+    }
 
-  /*data=data.toLowerCase();
-  console.log(data);
-  data=data.replace(/\|/g,"A");
-  console.log(data);
-  data=data.replace(/,/g,"B");
-  console.log(data);
-  data=data.replace(/\-/g,"C");
-  console.log(data);*/
+    /*data=data.toLowerCase();
+    console.log(data);
+    data=data.replace(/\|/g,"A");
+    console.log(data);
+    data=data.replace(/,/g,"B");
+    console.log(data);
+    data=data.replace(/\-/g,"C");
+    console.log(data);*/
 
 
-  out=convertFromBaseToBase(holder+"",10,36);
+    out=convertFromBaseToBase(holder+"",10,36);
 
     console.log("out");
     console.log(out);
-  console.log("end hashing");
-  return out;
+    console.log("end hashing");
+    return out;
 }
 function makehash(){
-  var cellArray = [];
-  var saveString = "";
-  for (var cell in cells) {
+    var cellArray = [];
+    var saveString = "";
+    for (var cell in cells) {
 
-      if (cell.substr(0, 3) == "POS") {
-          cellArray = cellArray.concat([cells[cell].x.toString(36) + "," + cells[cell].y.toString(36) + (cells[cell].s===1?"":"," + cells[cell].s.toString(36))]);
-      }
-  }
-  cellArray.sort(compare);
-  var cellsStringH=cellArray.join(";");
-  var paramList=[];
-  for(var i in params){
-      if(params.hasOwnProperty(i)){
-          if(i=="rule"){
-              paramList.push("rule="+$("#rules").val());
-          }else{
-            if(i=="cells"){
-                paramList.push("cells="+cellsStringH);
+        if (cell.substr(0, 3) == "POS") {
+            cellArray = cellArray.concat([cells[cell].x.toString(36) + "," + cells[cell].y.toString(36) + (cells[cell].s===1?"":"," + cells[cell].s.toString(36))]);
+        }
+    }
+    cellArray.sort(compare);
+    var cellsStringH=cellArray.join(";");
+    var paramList=[];
+    for(var i in params){
+        if(params.hasOwnProperty(i)){
+            if(i=="rule"){
+                paramList.push("rule="+$("#rules").val());
             }else{
-              if(i=="base"){
-                  paramList.push("base="+36);
-              }else{
-                  paramList.push(i+"="+params[i]);
-              }
+                if(i=="cells"){
+                    paramList.push("cells="+cellsStringH);
+                }else{
+                    if(i=="base"){
+                        paramList.push("base="+36);
+                    }else{
+                        paramList.push(i+"="+params[i]);
+                    }
+                }
             }
-          }
-      }
-  }
-  if(!params.hasOwnProperty("cells")){
-    paramList.push("cells="+cellsStringH);
-  }
-  if(!params.hasOwnProperty("rule")){
-    paramList.push("rule="+$("#rules").val());
-  }
-  if(!params.hasOwnProperty("base")){
-    paramList.push("base="+36);
-  }
+        }
+    }
+    if(!params.hasOwnProperty("cells")){
+        paramList.push("cells="+cellsStringH);
+    }
+    if(!params.hasOwnProperty("rule")){
+        paramList.push("rule="+$("#rules").val());
+    }
+    if(!params.hasOwnProperty("base")){
+        paramList.push("base="+36);
+    }
 
 
-  var loc="?"+paramList.join("&");
-  var current=document.location.href;
-  var stateObj = {  current: loc };
+    var loc="?"+paramList.join("&");
+    var current=document.location.href;
+    var stateObj = {  current: loc };
     //window.location.search = loc;
-  history.pushState(stateObj, "Super Cellular Automata", loc);
+    history.pushState(stateObj, "Super Cellular Automata", loc);
 }
 function convertFromBaseToBase(str, fromBase, toBase){
-	var num = parseInt(str, fromBase);
+    var num = parseInt(str, fromBase);
     return num.toString(toBase);
 }
 //Convert number in string representation from base:from to base:to.
@@ -157,8 +157,8 @@ function loadSave(x) {
     for (var i = 0; i < cellList.length; i++) {
         var element = cellList[i].split(",");
         addCell(parseInt(element[0]), parseInt(element[1]), parseInt(element[2]));
-      }
     }
+}
 
 
 function savePattern() {
@@ -168,7 +168,7 @@ function savePattern() {
 function submitpat() {
     clearCells();
     var x = $("#inputTextToSave").val();
-  //  console.log(convertToHash(x));
+    //  console.log(convertToHash(x));
     //console.log(convertFromHash(convertToHash(x)));
     //x=convertFromHash(convertToHash(x));
     var cellList = x.split("|");
@@ -292,17 +292,17 @@ function clone(obj) {
 }
 
 if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() == "") {
-        Rule = eval($("#rules").val());
+    Rule = eval($("#rules").val());
 
-        var brush = 0;
-        $(".tool-item-state-selection").html("");
-        var colors = ["black"].concat(Rule.colors);
-        for (var i = 0; i < colors.length; i++) {
-            //console.log(colors);
-            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
+    var brush = 0;
+    $(".tool-item-state-selection").html("");
+    var colors = ["black"].concat(Rule.colors);
+    for (var i = 0; i < colors.length; i++) {
+        //console.log(colors);
+        var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
 
-        }
     }
+}
 //updateRules();
 //$(".rule-script").html($(".rule-area").val());
 
@@ -361,25 +361,25 @@ if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() ==
 //var x=101;for(var y=0;y<=202;y++){x-=203;for(var z=0;z<=202;z++){x++;if((Math.sqrt(Math.pow(x,2)+Math.pow(y-101,2))%3+3)%3<1){addCell(x,y,1)}}}
 var cellQ = params.cells;
 if(cellQ!==undefined && cellQ!==null){
-  var b=params.base;
-  if(b===undefined){
-b=10;
-  }
-var pairs = cellQ.split(";")
-pairs.forEach(function(p) {
-    var xy = p.split(",");
-    var x = parseInt(xy[0],b);
-    var y = parseInt(xy[1],b);
-    var s=1;
-    if(xy[2]!==undefined){
-s=parseInt(xy[2],b);
+    var b=params.base;
+    if(b===undefined){
+        b=10;
     }
-    addCell(x, y, s);
-});
+    var pairs = cellQ.split(";")
+    pairs.forEach(function(p) {
+        var xy = p.split(",");
+        var x = parseInt(xy[0],b);
+        var y = parseInt(xy[1],b);
+        var s=1;
+        if(xy[2]!==undefined){
+            s=parseInt(xy[2],b);
+        }
+        addCell(x, y, s);
+    });
 }
 
 /*for(var i=-300;i<300;i++){
-  addCell(i, 0, 1);
+addCell(i, 0, 1);
 }*/
 
 //randomCells();
@@ -387,9 +387,9 @@ s=parseInt(xy[2],b);
 window.setInterval(tick, 1);
 
 /*$('#run-toggle').change(function() {
-    if (!inToggle) {
-        toggleCalc();
-    }
+if (!inToggle) {
+toggleCalc();
+}
 });*/
 
 function toggleCalc() {
@@ -484,8 +484,8 @@ function calc() {
             if (value != 0) {
                 if(cells[m]!==undefined){
                     if(cells[m].s===value){
-                    toCalc[m]=cells[m];
-                }
+                        toCalc[m]=cells[m];
+                    }
                 }
                 cells[m] = toCalc[m];
                 cells[m].s = value;
@@ -502,13 +502,13 @@ function calc() {
 
 function compare(a, b) {
     if (a.x < b.x)
-        return -1;
+    return -1;
     if (a.x > b.x)
-        return 1;
+    return 1;
     if (a.y < b.y)
-        return -1;
+    return -1;
     if (a.y > b.y)
-        return 1;
+    return 1;
     return 0;
 }
 
@@ -574,7 +574,7 @@ function groupOf(currentCell,groups,groupColors,gro){
                 groupOf("POS" + ns[m].x + "_" + ns[m].y,groups,groupColors,gro);
             }
         }
-}
+    }
 }
 
 function tick() {
@@ -622,82 +622,82 @@ function tick() {
     if (zoom > Math.pow(1.5, -3) || true) {
 
 
-            ctx.lineWidth=1/zoom;
-            ctx.beginPath();
-            ctx.strokeStyle = "#00ACDB";
-            ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
-            ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
-            ctx.stroke();
+        ctx.lineWidth=1/zoom;
+        ctx.beginPath();
+        ctx.strokeStyle = "#00ACDB";
+        ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
+        ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
+        ctx.stroke();
 
 
 
 
-            ctx.beginPath();
-            ctx.strokeStyle = "#00ACDB";
-            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
-            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
-            ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "#00ACDB";
+        ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
+        ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
+        ctx.stroke();
 
 
     }
     countCells();
     //findGroups();
     for (var cell in cells) {
-      if(zoom > Math.pow(1.5, -6)){
-        if (cell.substr(0, 3) == "POS") {
-            if (cells[cell].s != 2) {
-                ctx.fillStyle = "red";
-            } else {
-                ctx.fillStyle = "blue";
+        if(zoom > Math.pow(1.5, -6)){
+            if (cell.substr(0, 3) == "POS") {
+                if (cells[cell].s != 2) {
+                    ctx.fillStyle = "red";
+                } else {
+                    ctx.fillStyle = "blue";
+                }
+                ctx.fillStyle = Rule.colors[cells[cell].s - 1];
+                var boxX = cells[cell].x * 10 - scrollX;
+                var boxY = cells[cell].y * 10 - scrollY;
+                ctx.beginPath();
+                ctx.fillRect(boxX, boxY, 10, 10);
+                ctx.fill();
             }
-            ctx.fillStyle = Rule.colors[cells[cell].s - 1];
-            var boxX = cells[cell].x * 10 - scrollX;
-            var boxY = cells[cell].y * 10 - scrollY;
-            ctx.beginPath();
-            ctx.fillRect(boxX, boxY, 10, 10);
-            ctx.fill();
-        }
-      }else{
-        if (cell.substr(0, 3) == "POS") {
-            if (cells[cell].s != 2) {
-                ctx.fillStyle = "red";
-            } else {
-                ctx.fillStyle = "blue";
+        }else{
+            if (cell.substr(0, 3) == "POS") {
+                if (cells[cell].s != 2) {
+                    ctx.fillStyle = "red";
+                } else {
+                    ctx.fillStyle = "blue";
+                }
+                ctx.fillStyle = Rule.colors[cells[cell].s - 1];
+                var boxX = cells[cell].x * 10 - scrollX;
+                var boxY = cells[cell].y * 10 - scrollY;
+                ctx.beginPath();
+                ctx.fillRect(boxX, boxY, 1/zoom, 1/zoom);
+                ctx.fill();
             }
-            ctx.fillStyle = Rule.colors[cells[cell].s - 1];
-            var boxX = cells[cell].x * 10 - scrollX;
-            var boxY = cells[cell].y * 10 - scrollY;
-            ctx.beginPath();
-            ctx.fillRect(boxX, boxY, 1/zoom, 1/zoom);
-            ctx.fill();
         }
-      }
     }
     if(selection.on){
-    var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
-    var boxX = selectionOrdered.start.x * 10 - scrollX;
-    var boxY =selectionOrdered.start.y * 10 - scrollY;
-    ctx.beginPath();
-    ctx.fillStyle = "rgba(0,255,0,0.2)";
-    ctx.fillRect(boxX, boxY, selectionOrdered.end.x * 10-selectionOrdered.start.x * 10+10, selectionOrdered.end.y * 10-selectionOrdered.start.y * 10+10);
-    ctx.fill();
-
-  }
-  if(pasting){
-    var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
-    var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
-    selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
-    for(var i=0;i<clipboard.length;i++){
-      var boxX = (clipboard[i].x+selectionOrdered.start.x) * 10 - scrollX;
-      var boxY = (clipboard[i].y+selectionOrdered.start.y) * 10 - scrollY;
-      ctx.beginPath();
-      ctx.fillStyle = "rgba(0,255,0,0.2)";
-      ctx.fillRect(boxX, boxY, 10,10);
-      ctx.fill();
-
+        var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+        var boxX = selectionOrdered.start.x * 10 - scrollX;
+        var boxY =selectionOrdered.start.y * 10 - scrollY;
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0,255,0,0.2)";
+        ctx.fillRect(boxX, boxY, selectionOrdered.end.x * 10-selectionOrdered.start.x * 10+10, selectionOrdered.end.y * 10-selectionOrdered.start.y * 10+10);
+        ctx.fill();
 
     }
-}
+    if(pasting){
+        var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
+        var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
+        selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
+        for(var i=0;i<clipboard.length;i++){
+            var boxX = (clipboard[i].x+selectionOrdered.start.x) * 10 - scrollX;
+            var boxY = (clipboard[i].y+selectionOrdered.start.y) * 10 - scrollY;
+            ctx.beginPath();
+            ctx.fillStyle = "rgba(0,255,0,0.2)";
+            ctx.fillRect(boxX, boxY, 10,10);
+            ctx.fill();
+
+
+        }
+    }
 }
 
 function clearCells() {
@@ -728,8 +728,8 @@ function randomCells() {
         Rule.random();
     } else {
         for (var i = 0; i < 500+Math.random()*120; i++) {
-          var gridX = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
-          var gridY = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
+            var gridX = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
+            var gridY = Math.floor(Math.random() * 8)*105 +Math.floor(Math.random() * 6) - 105*4;
             var state = Math.floor(Math.random() * 1) + 1
             cells["POS" + gridX + "_" + gridY] = {
                 x: gridX,
@@ -762,7 +762,7 @@ function loadAndOpenFile() {
         clearCells();
 
         var x = textFromFileLoaded;//$("#inputTextToSave").val();
-      //  console.log(convertToHash(x));
+        //  console.log(convertToHash(x));
         //console.log(convertFromHash(convertToHash(x)));
         //x=convertFromHash(convertToHash(x));
         var cellList = x.split("|");
@@ -789,9 +789,9 @@ function cloneObject(obj) {
     var clone = {};
     for(var i in obj) {
         if(typeof(obj[i])=="object" && obj[i] != null)
-            clone[i] = cloneObject(obj[i]);
+        clone[i] = cloneObject(obj[i]);
         else
-            clone[i] = obj[i];
+        clone[i] = obj[i];
     }
     return clone;
 }
@@ -812,7 +812,7 @@ function selectRule() {
         paintColor=1;
     }
     if(params.rule!=$("#rules").val()){
-      params.rule=$("#rules").val();
+        params.rule=$("#rules").val();
         var newSearch="";
         var paramList=[];
         for(var i in params){
@@ -825,20 +825,20 @@ function selectRule() {
             }
         }
         if(!params.hasOwnProperty("rule")){
-          paramList.push("rule="+$("#rules").val());
+            paramList.push("rule="+$("#rules").val());
         }
         var loc="?"+paramList.join("&");
         var current=document.location.href;
         var stateObj = {  current: loc };
-          //window.location.search = loc;
+        //window.location.search = loc;
         history.pushState(stateObj, "Super Cellular Automata", loc);
         //history.pushState({}, loc, loc);
-       // window. = paramList.join("&");
+        // window. = paramList.join("&");
     }
 }
 function printCells(){
     var cellArray=[];
-for (var cell in cells) {
+    for (var cell in cells) {
 
         if (cell.substr(0, 3) == "POS") {
             cellArray.push([cells[cell].x,cells[cell].y,cells[cell].s]);
@@ -859,141 +859,141 @@ function selectTool(tID){
     toolMode=tID;
 }
 function cut(){
-  stop();
-  if(selection.on){
-  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
-clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
-  clipboard=[];
-  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+    stop();
+    if(selection.on){
+        var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+        clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
+        clipboard=[];
+        for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
 
-    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
-  if(cells["POS" + x + "_" + y]){
-    if(cells["POS" + x + "_" + y].s!==0){
-      var c=cells["POS" + x + "_" + y];
-      clipboard.push(c);
-      clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
-      clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
-      delete cells["POS" + x + "_" + y];
-    }
-  }
-    }
-  }
+            for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+                if(cells["POS" + x + "_" + y]){
+                    if(cells["POS" + x + "_" + y].s!==0){
+                        var c=cells["POS" + x + "_" + y];
+                        clipboard.push(c);
+                        clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
+                        clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
+                        delete cells["POS" + x + "_" + y];
+                    }
+                }
+            }
+        }
 
-}
+    }
 
 
 }
 function clearSelected(){
-  stop();
-  if(selection.on){
-  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+    stop();
+    if(selection.on){
+        var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
 
-  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+        for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
 
-    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
-  if(cells["POS" + x + "_" + y]){
-    if(cells["POS" + x + "_" + y].s!==0){
-      var c=cells["POS" + x + "_" + y];
+            for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+                if(cells["POS" + x + "_" + y]){
+                    if(cells["POS" + x + "_" + y].s!==0){
+                        var c=cells["POS" + x + "_" + y];
 
-      delete cells["POS" + x + "_" + y];
+                        delete cells["POS" + x + "_" + y];
+                    }
+                }
+            }
+        }
+
     }
-  }
-    }
-  }
-
-  }
 
 }
 function copy(){
-  stop();
-  if(selection.on){
-  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
-clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
-  clipboard=[];
-  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+    stop();
+    if(selection.on){
+        var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+        clipboardDim={w:selectionOrdered.end.x-selectionOrdered.start.x+1,h:selectionOrdered.end.y-selectionOrdered.start.y+1};
+        clipboard=[];
+        for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
 
-    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
-  if(cells["POS" + x + "_" + y]){
-    if(cells["POS" + x + "_" + y].s!==0){
-      var c=cells["POS" + x + "_" + y];
-      clipboard.push(clone(c));
-      clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
-      clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
+            for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+                if(cells["POS" + x + "_" + y]){
+                    if(cells["POS" + x + "_" + y].s!==0){
+                        var c=cells["POS" + x + "_" + y];
+                        clipboard.push(clone(c));
+                        clipboard[clipboard.length-1].x=clipboard[clipboard.length-1].x-selectionOrdered.start.x;
+                        clipboard[clipboard.length-1].y=clipboard[clipboard.length-1].y-selectionOrdered.start.y;
+
+                    }
+                }
+            }
+        }
 
     }
-  }
-    }
-  }
-
-}
 
 
 }
 function startPaste(){
-  stop();
-  if(!pasting){
-  pasting=true;
-}
+    stop();
+    if(!pasting){
+        pasting=true;
+    }
 }
 function paste(){
-  stop();
-  pasting=false;
-  var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
-  var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
-  selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
-  if(selection.on){
-  var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
-/*  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
-    for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
-  if(cells["POS" + x + "_" + y]){
-    if(cells["POS" + x + "_" + y].s!==0){
+    stop();
+    pasting=false;
+    var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
+    var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
+    selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
+    if(selection.on){
+        var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
+        /*  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
+        for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
+        if(cells["POS" + x + "_" + y]){
+        if(cells["POS" + x + "_" + y].s!==0){
 
-      delete cells["POS" + x + "_" + y];
+        delete cells["POS" + x + "_" + y];
     }
-  }
-    }
-  }
+}
+}
+}
 */
 
-  for(var i=0;i<clipboard.length;i++){
+for(var i=0;i<clipboard.length;i++){
 
 
 
-      //clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
-      //clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
-addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.start.y,clipboard[i].s);
-    }
-  }
-    }
-    Mousetrap.bind(['command+c', 'ctrl+c'], function(e) {
-        copy();
-        return false;
-    });
-    Mousetrap.bind(['command+x', 'ctrl+x'], function(e) {
-        cut();
-        return false;
-    });
-    Mousetrap.bind(['command+v', 'ctrl+v'], function(e) {
-        startPaste();
-        return false;
-    });
-    Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
-        savePattern();
-        return false;
-    });
-    Mousetrap.bind(['command+o', 'ctrl+o'], function(e) {
-        loadAndOpenFile();
-        return false;
-    });
-    Mousetrap.bind('enter', function(e) {
-        toggleCalc();
-        return false;
-    });
-    Mousetrap.bind('space', function(e) {
-        calc();
-        return false;
-    });
-    Mousetrap.bind(['delete', 'backspace'], function(e) {
-        clearSelected();
-        return false;
-    });
+    //clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
+    //clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
+    addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.start.y,clipboard[i].s);
+}
+}
+}
+Mousetrap.bind(['command+c', 'ctrl+c'], function(e) {
+    copy();
+    return false;
+});
+Mousetrap.bind(['command+x', 'ctrl+x'], function(e) {
+    cut();
+    return false;
+});
+Mousetrap.bind(['command+v', 'ctrl+v'], function(e) {
+    startPaste();
+    return false;
+});
+Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
+    savePattern();
+    return false;
+});
+Mousetrap.bind(['command+o', 'ctrl+o'], function(e) {
+    loadAndOpenFile();
+    return false;
+});
+Mousetrap.bind('enter', function(e) {
+    toggleCalc();
+    return false;
+});
+Mousetrap.bind('space', function(e) {
+    calc();
+    return false;
+});
+Mousetrap.bind(['delete', 'backspace'], function(e) {
+    clearSelected();
+    return false;
+});
