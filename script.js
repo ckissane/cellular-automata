@@ -442,7 +442,7 @@ function start() {
     if (!running) {
         selectRule();
         //$(".rule-script").html($(".rule-area").val());
-        calcLoop = window.setInterval(calc, 1);
+        calcLoop = window.setInterval(calc, 100);
         running = true;
 
     } else {
