@@ -728,6 +728,8 @@ function clearCells() {
         }
     }
     generations=0;
+    //console.log(generations)
+    $(".cell-gen").html(" Generation: " + generations);
 }
 
 function countCells() {
@@ -1039,5 +1041,13 @@ Mousetrap.bind('space', function(e) {
 });
 Mousetrap.bind(['delete', 'backspace'], function(e) {
     clearSelected();
+    return false;
+});
+Mousetrap.bind('plus', function(e) {
+    zoomIn();
+    return false;
+});
+Mousetrap.bind('-', function(e) {
+    zoomOut();
     return false;
 });
