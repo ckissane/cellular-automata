@@ -333,14 +333,18 @@ scrollY-=diff.y/zoom;
         <div class="canvas-cont-big fse-EditorPanel" style="overflow:hidden">
             <div class="fs-Toolbar options-toolbar canvas-toolbar" style="overflow:hidden">
               <div class="tool-item-row">
-
-                  <div class="tool-item-button play-pause-button" onclick="toggleCalc()"><i class="fa fa-play"></i><i class="fa fa-pause"></i></div>
-                  <div class="tool-item-button selected" value="pencil" onclick="selectTool('pencil')"><i class="fa fa-pencil"></i></div>
-                  <div class="tool-item-button" value="pick" onclick="selectTool('pick')"><i class="fa fa-eyedropper"></i></div>
-                  <div class="tool-item-button" value="select" onclick="selectTool('select')"><i class="fa fa-object-ungroup"></i></div>
-                  <div class="tool-item-button" value="move" onclick="selectTool('move')"><i class="fa fa-hand-rock-o"></i></div>
-                  <div class="tool-item-button" onclick="scrollX=0;scrollY=0;">
-                  <i class="fa fa-crosshairs" aria-hidden="true"></i></div>
+                  <div class="btn-group tool-item-group">
+                      <button type="button" class="btn btn-default play-pause-button" onclick="toggleCalc()">
+                          <i class="fa fa-play"></i><i class="fa fa-pause"></i></button>
+                      <button type="button" class="btn btn-default selected" value="pencil" onclick="selectTool('pencil')">
+                          <i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-default" value="pick" onclick="selectTool('pick')"><i class="fa fa-eyedropper"></i></button>
+                      <button type="button" class="btn btn-default" value="select" onclick="selectTool('select')"><i class="fa fa-object-ungroup"></i></button>
+                      <button type="button" class="btn btn-default" value="move" onclick="selectTool('move')"><i class="fa fa-hand-rock-o"></i></button>
+                          <button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;">
+                          <i class="fa fa-crosshairs" aria-hidden="true"></i></button>
+                  </div>
+                  
                 </div>
                   <div class="tool-item-row">
                     <div class="tool-item-label-column"><div class="label">State:</div><div class="label">Color:</div></div>

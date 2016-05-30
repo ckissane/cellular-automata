@@ -853,7 +853,9 @@ function selectColor(cID){
 }
 function selectTool(tID){
     $(".tool-item-button").removeClass("selected");
+    $(".tool-item-row .btn-default.selected").removeClass("selected");
     $(".tool-item-button[value="+tID+"]").addClass("selected");
+    $(".tool-item-row .btn-default[value="+tID+"]").addClass("selected");
     toolMode=tID;
 }
 function cut(){

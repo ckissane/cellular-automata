@@ -464,6 +464,23 @@ background:#eee;
   display:inline-block;
   text-align: center;
 }
+.tool-item-group{
+  margin-left:6px;
+}
+.tool-item-group .btn-default{
+font-size: 18px;
+padding:2px;
+width:30px;
+height:30px;
+outline: none !important;
+}
+.tool-item-group .btn-default:active{
+font-size: 18px;
+padding:2px;
+width:30px;
+height:30px;
+outline: none !important;
+}
 .tool-item-button.selected{
   border:1px solid #00ACDB;
   color:#00ACDB;
@@ -531,3 +548,76 @@ padding-right: 4px;
 #file-open-input{
   display: none;
 }
+.tool-item-row .btn-default.selected {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  outline: none;
+}
+/*
+.tool-item-row .btn-default.selected:focus,
+.tool-item-row .btn-default.selected.focus {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #1b6d85;
+  outline: none;
+}
+.tool-item-row .btn-default.selected:hover {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+  outline: none;
+}
+.tool-item-row .btn-default.selected:active,
+.tool-item-row .btn-default.selected.active,
+.open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+  outline: none;
+}
+.tool-item-row .btn-default.selected:active:hover,
+.tool-item-row .btn-default.selected.active:hover,
+.open > .dropdown-toggle.btn-info:hover,
+.tool-item-row .btn-default.selected:active:focus,
+.tool-item-row .btn-default.selected.active:focus,
+.open > .dropdown-toggle.btn-info:focus,
+.tool-item-row .btn-default.selected:active.focus,
+.tool-item-row .btn-default.selected.active.focus,
+.open > .dropdown-toggle.btn-info.focus {
+  color: #fff;
+  background-color: #269abc;
+  border-color: #1b6d85;
+  outline: none;
+}
+.tool-item-row .btn-default.selected:active,
+.tool-item-row .btn-default.selected.active,
+.open > .dropdown-toggle.btn-info {
+  background-image: none;
+}
+.tool-item-row .btn-default.selected.disabled,
+.tool-item-row .btn-default.selected[disabled],
+fieldset[disabled] .tool-item-row .btn-default.selected,
+.tool-item-row .btn-default.selected.disabled:hover,
+.tool-item-row .btn-default.selected[disabled]:hover,
+fieldset[disabled] .tool-item-row .btn-default.selected:hover,
+.tool-item-row .btn-default.selected.disabled:focus,
+.tool-item-row .btn-default.selected[disabled]:focus,
+fieldset[disabled] .tool-item-row .btn-default.selected:focus,
+.tool-item-row .btn-default.selected.disabled.focus,
+.tool-item-row .btn-default.selected[disabled].focus,
+fieldset[disabled] .tool-item-row .btn-default.selected.focus,
+.tool-item-row .btn-default.selected.disabled:active,
+.tool-item-row .btn-default.selected[disabled]:active,
+fieldset[disabled] .tool-item-row .btn-default.selected:active,
+.tool-item-row .btn-default.selected.disabled.active,
+.tool-item-row .btn-default.selected[disabled].active,
+fieldset[disabled] .tool-item-row .btn-default.selected.active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  outline: none;
+}
+.tool-item-row .btn-default.selected .badge {
+  color: #5bc0de;
+  background-color: #fff;
+}*/
