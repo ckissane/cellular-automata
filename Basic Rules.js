@@ -32,6 +32,107 @@ var ExtendedMooreB4S4 = {
         }
     }
 };
+var SameDiagonals = {
+    ruleName: "SameDiagonals",
+    colors: ["white"],
+    states: 2,
+    neighborsForCell: function(cell, cellset) {
+        var neighbors = [];
+        /*for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                if (j * j + i * i === 2) {
+                    neighbors = neighbors.concat([{
+                        x: cell.x + j,
+                        y: cell.y + i,
+                        s: getCell(cellset, cell.x + j, cell.y + i)
+                    }]);
+                }
+            }
+        }*/
+        var i=-1;
+        var j=0;
+        neighbors = neighbors.concat([{
+            x: cell.x + j,
+            y: cell.y + i,
+            s: getCell(cellset, cell.x + j, cell.y + i)
+        }]);
+        i=1;
+        j=0;
+        neighbors = neighbors.concat([{
+            x: cell.x + j,
+            y: cell.y + i,
+            s: getCell(cellset, cell.x + j, cell.y + i)
+        }]);
+        i=0;
+        j=1;
+        neighbors = neighbors.concat([{
+            x: cell.x + j,
+            y: cell.y + i,
+            s: getCell(cellset, cell.x + j, cell.y + i)
+        }]);
+        i=0;
+        j=-1;
+        neighbors = neighbors.concat([{
+            x: cell.x + j,
+            y: cell.y + i,
+            s: getCell(cellset, cell.x + j, cell.y + i)
+        }]);
+        return neighbors;
+    },
+    calcCell: function(cell, cellset) {
+        var nebs = SameDiagonals.neighborsForCell(cell, cellset);
+        var nebCount = 0;
+        /*for (var i = 0; i < nebs.length; i++) {
+            if (nebs[i].s != 0) {
+                nebCount++;
+            }
+        }*/
+        var same1=Math.abs(nebs[0].s-nebs[1].s);
+        var same2=Math.abs(nebs[2].s-nebs[3].s);
+        if (same1===same2) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+};
+var ExtendedMooreB4S3 = {
+    ruleName: "5x5;B4S3",
+    colors: ["white"],
+    states: 2,
+    neighborsForCell: function(cell, cellset) {
+        var neighbors = [];
+        for (var i = -2; i <= 2; i++) {
+            for (var j = -2; j <= 2; j++) {
+                if (j * j + i * i > 0) {
+                    neighbors = neighbors.concat([{
+                        x: cell.x + j,
+                        y: cell.y + i,
+                        s: getCell(cellset, cell.x + j, cell.y + i)
+                    }]);
+                }
+            }
+        }
+        return neighbors;
+    },
+    calcCell: function(cell, cellset) {
+        var nebs = ExtendedMooreB4S3.neighborsForCell(cell, cellset);
+        var nebCount = 0;
+        for (var i = 0; i < nebs.length; i++) {
+            if (nebs[i].s != 0) {
+                nebCount+=1;
+                if (Math.max(Math.abs(nebs[i].x-cell.x),Math.abs(nebs[i].y-cell.y)) >1) {
+                    //nebCount-=0.2;
+                }
+            }
+        }
+        if (nebCount+getCell(cellset, cell.x, cell.y)  ==4 ) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+};
 var Extended2MooreB10S10 = {
     ruleName: "7x7;B10S10",
     colors: ["white"],
