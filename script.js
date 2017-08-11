@@ -830,6 +830,7 @@ function loadFileAsText() {
     fileReader.onload = function(fileLoadedEvent) {
         var textFromFileLoaded = fileLoadedEvent.target.result;
         $("#inputTextToSave")[0].value = textFromFileLoaded;
+        submitpat();
     };
     fileReader.readAsText(fileToLoad, "UTF-8");
 }
