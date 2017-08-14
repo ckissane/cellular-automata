@@ -339,7 +339,7 @@ if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() ==
 //crazygro3
 //?cells=0,0;0,1;1,0;1,1;5,0;5,1;6,0;6,1;7,0;7,1;3,2;3,3;3,-1;3,-2
 
-// pisser ?cells=0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4
+// supriser ?cells=0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4
 // 4-cycle glider ?cells=0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4;4,0
 
 // surprise surprise ?cells=0,0;0,1;0,2;0,3;2,-1;3,-1;2,4;4,4;4,1
@@ -354,7 +354,7 @@ if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() ==
 
 // hellfire ?cells=0,60;0,61;1,60;1,61;0,62;1,62;2,63;-1,63
 
-// piss2 ?cells=0,60;0,61;1,60;1,61;0,62;1,62;2,63;-1,63;-1,66;0,66;1,66;2,66
+// supriser2 ?cells=0,60;0,61;1,60;1,61;0,62;1,62;2,63;-1,63;-1,66;0,66;1,66;2,66
 
 // 12-step ?cells=0,60;0,61;1,60;1,61;0,62;1,62;3,63;-1,63;
 
@@ -830,7 +830,20 @@ function loadFileAsText() {
     fileReader.onload = function(fileLoadedEvent) {
         var textFromFileLoaded = fileLoadedEvent.target.result;
         $("#inputTextToSave")[0].value = textFromFileLoaded;
-        submitpat();
+        //submitpat();
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        //$("#inputTextToSave")[0].value = textFromFileLoaded;
+        clearCells();
+
+        var x = textFromFileLoaded;//$("#inputTextToSave").val();
+        //  console.log(convertToHash(x));
+        //console.log(convertFromHash(convertToHash(x)));
+        //x=convertFromHash(convertToHash(x));
+        var cellList = x.split("|");
+        for (var i = 0; i < cellList.length; i++) {
+            var element = cellList[i].split(",");
+            addCell(parseInt(element[0]), parseInt(element[1]), parseInt(element[2]));
+        }
     };
     fileReader.readAsText(fileToLoad, "UTF-8");
 }
