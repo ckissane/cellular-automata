@@ -206,7 +206,7 @@ function MouseWheelHandler(e) {
     var pGridX = oGridX - (0 + scrollX * zoom) / 10 / zoom;
     var pGridY = oGridY - (0 + scrollY * zoom) / 10 / zoom;
 
-    zoom = zoom * Math.pow(1.5, -delta);
+    zoom = zoom * Math.pow(1.1, -delta/2);
     var newOffsetX = e.pageX - 0 - document.body.scrollLeft - w / 2;
     var newOffsetY = e.pageY - 0 - document.body.scrollTop - h / 2;
     if (zoom < Math.pow(1.5, -16)) {
@@ -611,34 +611,34 @@ function tick() {
     $(".toggle").attr("height", 30);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, w, h);
-    ctx.translate(w / 2, h / 2);
+    ctx.translate(Math.floor(w / 2), Math.floor(h / 2));
     ctx.scale(zoom, zoom);
     ctx.strokeStyle = "black";
     var floorSX = scrollX - scrollX % 10;
     var floorSY = scrollY - scrollY % 10;
-    if (zoom > Math.pow(1.5, -3)) {
+    if (zoom > 0.1/0.4) {
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
 
 
 
             ctx.beginPath();
-            ctx.lineWidth=1/zoom;
-            ctx.moveTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
-            ctx.lineTo((-scrollX) % 10 - 10 + x * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
+            ctx.lineWidth=2/zoom;
+            ctx.moveTo(Math.floor(((-scrollX) % 10 - 10 + x * 10)*zoom)*1/zoom, (-scrollY) % 10 - 10 - h / zoom / 2);
+            ctx.lineTo(Math.floor(((-scrollX) % 10 - 10 + x * 10)*zoom)*1/zoom, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
             ctx.strokeStyle = "grey";
             ctx.stroke();
         }
         for (var y = -Math.ceil(h / zoom / 20) - 2; y < Math.ceil(h / zoom / 20) + 2; y++) {
             ctx.beginPath();
             ctx.lineWidth=1/zoom;
-            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
-            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, (-scrollY) % 10 - 10 + y * 10);
+            ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, Math.floor(((-scrollY) % 10 - 10 + y * 10)*zoom)*1/zoom);
+            ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, Math.floor(((-scrollY) % 10 - 10 + y * 10)*zoom)*1/zoom);
             ctx.strokeStyle = "grey";
             ctx.stroke();
 
         }
     }
-    if (zoom > Math.pow(1.5, -3) || true) {
+    if (zoom >0.1/0.4) {
 
 
         ctx.lineWidth=1/zoom;
@@ -662,7 +662,7 @@ function tick() {
     countCells();
     //findGroups();
     for (var cell in cells) {
-        if(zoom > Math.pow(1.5, -6)){
+        if(zoom >0.1/0.4){
             if (cell.substr(0, 3) == "POS") {
                 if (cells[cell].s != 2) {
                     ctx.fillStyle = "red";
@@ -673,7 +673,7 @@ function tick() {
                 var boxX = cells[cell].x * 10 - scrollX;
                 var boxY = cells[cell].y * 10 - scrollY;
                 ctx.beginPath();
-                ctx.fillRect(boxX, boxY, 10, 10);
+                ctx.fillRect(Math.floor((boxX)*zoom)*1/zoom, Math.floor((boxY)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX)*zoom)*1/zoom,Math.floor((boxY+10)*zoom)*1/zoom-Math.floor((boxY)*zoom)*1/zoom);
                 ctx.fill();
             }
         }else{
@@ -917,8 +917,12 @@ function selectColor(cID){
 function selectTool(tID){
     $(".tool-item-button").removeClass("selected");
     $(".tool-item-row .btn-default.selected").removeClass("selected");
+    $(".tool-item-row .mdl-button.selected").removeClass("selected");
+    $(".tool-item-row .mdl-button.mdl-button--colored").removeClass("mdl-button--colored");
     $(".tool-item-button[value="+tID+"]").addClass("selected");
     $(".tool-item-row .btn-default[value="+tID+"]").addClass("selected");
+    $(".tool-item-row .mdl-button[value="+tID+"]").addClass("mdl-button--colored");
+    $(".tool-item-row .mdl-button[value="+tID+"]").addClass("selected");
     toolMode=tID;
 }
 function cut(){

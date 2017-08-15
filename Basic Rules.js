@@ -431,7 +431,7 @@ var PersianCarpet = {
 };
 var ColeRule = {
     ruleName: "ColeRule",
-    colors: ["white", "pink", "yellow", "green"],
+    colors: ["white", "#E91E63", "#FFEB3B", "#2196F3"],
     states: 5,
     neighborsForCell: function(cell, cellset) {
         var neighbors = [];
@@ -464,6 +464,64 @@ var ColeRule = {
             for (var i = -1; i <= 1; i++) {
                 for (var j = -1; j <= 1; j++) {
                     if (j * j + i * i == 1 && getCell(cellset, cell.x + j, cell.y + i) == 1 && getCell(cellset, cell.x + j * 2, cell.y + i * 2) == 4) {
+                        return 1;
+                    }
+                }
+            }
+            return 0;
+        } else if (getCell(cellset, cell.x, cell.y) == 1) {
+            return 2;
+        } else if (getCell(cellset, cell.x, cell.y) == 3) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+};
+var ColeRule2 = {
+    ruleName: "ColeRule2",
+    colors: ["white", "#E91E63", "#FFEB3B", "#2196F3"],
+    states: 5,
+    neighborsForCell: function(cell, cellset) {
+        var neighbors = [];
+        if (getCell(cellset, cell.x, cell.y) < 3) {
+            for (var i = -1; i <= 1; i++) {
+                for (var j = -1; j <= 1; j++) {
+                    //if (j * j + i * i > 0) {
+                        neighbors = neighbors.concat([{
+                            x: cell.x + j,
+                            y: cell.y + i,
+                            s: getCell(cellset, cell.x + j, cell.y + i)
+                        }]);
+                    //}
+                }
+            }
+        }
+        return neighbors;
+    },
+    calcCell: function(cell, cellset) {
+        if (getCell(cellset, cell.x, cell.y) == 0) {
+            for (var i = -1; i <= 1; i++) {
+                for (var j = -1; j <= 1; j++) {
+                    if (j * j + i * i >0 && getCell(cellset, cell.x + j, cell.y + i) == 1 && ((j * j + i * i===1)?(getCell(cellset, cell.x + j * 2, cell.y + i * 2) < 4 &&getCell(cellset, cell.x + j * 2, cell.y + i * 2) > 1)&&
+                        ((([0,1,3,4].indexOf(getCell(cellset, cell.x + j*2-i, cell.y + i*2-j)) >=0|| [4].indexOf(getCell(cellset, cell.x +i, cell.y +j)) >=0)&&([0,1,3,4].indexOf(getCell(cellset, cell.x + j*2+i, cell.y + i*2+j)) >=0|| [4].indexOf(getCell(cellset, cell.x -i, cell.y -j)) >=0))||getCell(cellset, cell.x + j*2, cell.y + i*2) == 30)&&
+                        ((([4].indexOf(getCell(cellset, cell.x + j*2-i, cell.y + i*2-j)) >=0|| [0,1,3,4].indexOf(getCell(cellset, cell.x +i, cell.y +j)) >=0)&&([4].indexOf(getCell(cellset, cell.x + j*2+i, cell.y + i*2+j)) >=0|| [0,1,3,4].indexOf(getCell(cellset, cell.x -i, cell.y -j)) >=0))||getCell(cellset, cell.x + j*2, cell.y + i*2) == 30)&&
+                        ((([0,3,4].indexOf(getCell(cellset, cell.x + j*1-i, cell.y + i*1-j)) >=0|| [0,3,4].indexOf(getCell(cellset, cell.x +j+i, cell.y +i+j)) >=0)||getCell(cellset, cell.x +j+i, cell.y +i+j)===getCell(cellset, cell.x +j-i, cell.y +i-j))||getCell(cellset, cell.x + j*2, cell.y + i*2) !== 2)
+                        
+                        
+                    :(getCell(cellset, cell.x + j * 2, cell.y + i * 2) == 2||getCell(cellset, cell.x + j * 2, cell.y + i * 2) == 4&&
+                        (([0,1,3,4].indexOf(getCell(cellset, cell.x + j*1, cell.y + i *0)) >=0|| [3].indexOf(getCell(cellset, cell.x + j*1, cell.y + i *2)) >=0)&&([0,1,3,4].indexOf(getCell(cellset, cell.x + j*0, cell.y + i *1))>=0 || [3].indexOf(getCell(cellset, cell.x + j*2, cell.y + i *1)) >=0))&&
+                        (([3].indexOf(getCell(cellset, cell.x + j*1, cell.y + i *0)) >=0|| [0,1,3,4].indexOf(getCell(cellset, cell.x + j*1, cell.y + i *2)) >=0)&&([3].indexOf(getCell(cellset, cell.x + j*0, cell.y + i *1))>=0 || [0,1,3,4].indexOf(getCell(cellset, cell.x + j*2, cell.y + i *1)) >=0))
+                    ))) {
+                        return 1;
+                    }
+                }
+            }
+            return 0;
+        } else if (getCell(cellset, cell.x, cell.y) == 2) {
+            for (var i = -1; i <= 1; i++) {
+                for (var j = -1; j <= 1; j++) {
+                    if (j * j + i * i >0 && getCell(cellset, cell.x + j, cell.y + i) == 1 && ((j * j + i * i===2)?(getCell(cellset, cell.x + j * 2, cell.y + i * 2) < 4 &&getCell(cellset, cell.x + j * 2, cell.y + i * 2) > 2):((getCell(cellset, cell.x + j * 2, cell.y + i * 2) == -100||getCell(cellset, cell.x + j * 2, cell.y + i * 2) == 4)))) {
                         return 1;
                     }
                 }

@@ -131,6 +131,7 @@ div.canvas-cont-big {
     margin-left:0px;
     padding:0px;
     margin-bottom:0px;
+    position: relative;
 
 }
 .canvas-cont-big.options-off {
@@ -621,3 +622,43 @@ outline: none;
 color: #5bc0de;
 background-color: #fff;
 }*/
+.fab--absolute {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+@media(min-width: 1024px) {
+   .fab--absolute {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+#tools-list{
+list-style: none;
+pointer-events: none;
+}
+.tools-list-absolute li{
+    pointer-events: none;
+}
+.tools-list-absolute li{
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0,0);
+        margin-top: 0px;
+     transition: opacity 0.5s,transform 0.5s,margin-top 0.5s;
+}
+.tools-list-absolute:hover li{
+
+    pointer-events: initial;
+    opacity: 1;
+    transform: scale(1,1);
+        margin-top: 10px;
+    transition: opacity 0.5s,transform 0.5s,margin-top 0.5s;
+}
+.tools-list-absolute li.selected{
+    pointer-events: initial;
+    opacity: 1;
+    transform: scale(1,1);
+     transition: opacity 0.5s,transform 0.5s,margin-top 0.5s;
+}
