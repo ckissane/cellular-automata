@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <script src="jquery-1.12.4.min.js"></script>
     <script src="mousetrap.min.js"></script>
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="mdl-selectfield.min.css" />
     <script>
     function initPicker() {
         var picker = new FilePicker({
@@ -285,26 +287,9 @@ parent.classList.add("selected");
             </div>
             <div class="cell-num" style="margin-bottom:10px"></div>
             <div class="cell-gen" style="margin-bottom:10px">Generation:</div>
-            <div class="options-section-sub">Rule
-            </div>
 
 
-            <select id="rules" class="form-control btn-danger" onchange="selectRule()">
-                <option value="ExtendedMooreB4S4">ExtendedMooreB4S4</option>
-                <!--<option value="SameDiagonals">SameDiagonals</option>-->
-                <option value="ExtendedMooreB4S3">ExtendedMooreB4S3</option>
-                <option value="ExtendedMooreB56S45">ExtendedMooreB56S45</option>
-                <option value="Extended2MooreB10S10">Extended2MooreB10S10</option>
-                <option value="HexB4S4">HexB4S4</option>
-                <option value="ColeRule" selected>ColeRule</option>
-                <option value="ColeRule2">ColeRule2</option>
-                <option value="PersianCarpet">PersianCarpet</option>
-                <option value="Life">Life</option>
-                <option value="Life2">Life2</option>
-                <option value="RPS">Rock Paper Scissors</option>
-                <option value="Caves">Caves</option>
-                <option value="infexpand">Infinite Expander</option>
-            </select>
+            
             <div class="options-section-sub">Controls
             </div>
             <div class="btn-group running-group">
@@ -353,7 +338,7 @@ parent.classList.add("selected");
     <div class="fab--absolute tools-list-absolute">
         <ul id="tools-list">
             <li><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--blue mdl-button--mini-fab" onclick="selectToolButton(this,this.parentElement);selectTool('move')" value="move"><i class="material-icons">pan_tool</i></button></li>
-            <li><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--green mdl-button--mini-fab" onclick="selectToolButton(this,this.parentElement);selectTool('select')" value="select"><i class="material-icons">select_all</i></button></li>
+            <li><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--green mdl-button--mini-fab" onclick="selectToolButton(this,this.parentElement);selectTool('select')" value="select"><i class="material-icons">crop_free</i></button></li>
             <li><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--deep-purple mdl-button--mini-fab" onclick="selectToolButton(this,this.parentElement);selectTool('pick')" value="pick"><i class="material-icons">colorize</i></button></li>
             <li class="selected"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--red" onclick="selectToolButton(this,this.parentElement);selectTool('pencil')" value="pencil"><i class="material-icons">create</i></button></li>
             </ul>
@@ -361,10 +346,10 @@ parent.classList.add("selected");
     <div class="fs-Toolbar options-toolbar canvas-toolbar" style="overflow:hidden">
         <div class="tool-item-row">
             <div class="btn-group tool-item-group">
-                <button type="button" class="btn btn-default play-pause-button" onclick="toggleCalc()">
-                    <i class="fa fa-play"></i><i class="fa fa-pause"></i>
-                </button>
-            </div>
+            <button class="mdl-button mdl-js-button mdl-button--icon play-pause-button" onclick="toggleCalc()">
+  <i class="material-icons play-icon">play_arrow</i><i class="material-icons pause-icon">pause</i>
+</button>
+</div>
             <!--div class="btn-group tool-item-group">
                 <button id="tool-create" class="mdl-button mdl-js-button mdl-button--icon selected mdl-button--colored" value="pencil" onclick="selectTool('pencil')">
   <i class="material-icons">create</i>
@@ -392,16 +377,17 @@ Pan
 </div>
             </div-->
             <div class="btn-group tool-item-group">
-                <button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;"><i class="fa fa-map-marker"></i></button>
+                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="scrollX=0;scrollY=0;"><i class="material-icons">home</i></button>
                 <!--button type="button" class="btn btn-default" onclick="scrollX=0;scrollY=0;">
 
                 <i class="fa fa-crosshairs" aria-hidden="true"></i></button-->
-                <button type="button" class="btn btn-default" onclick="randomFill()"><i class="fa fa-random"></i></button>
-                <button type="button" class="btn btn-default" onclick="clearCells()"><i class="fa fa-bomb"></i></button>
+                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="randomFill()"><i class="material-icons">bubble_chart</i></button>
+                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="clearCells()"><i class="material-icons">clear</i></button>
             </div>
             <div class="btn-group tool-item-group">
-                <button type="button" class="btn btn-default" onclick="zoomIn()"><i class="fa fa-search-plus"></i></button>
-                <button type="button" class="btn btn-default" onclick="zoomOut()"><i class="fa fa-search-minus"></i></button>
+                 <button class="mdl-button mdl-js-button mdl-button--icon" onclick="zoomIn()"><i class="material-icons">zoom_in</i></button>
+               
+               <button class="mdl-button mdl-js-button mdl-button--icon" onclick="zoomOut()"><i class="material-icons">zoom_out</i></button>
             </div>
             <div class="btn-group tool-item-group">
                 <button type="button" class="btn btn-default" onclick="savePattern()"><i class="fa fa-download"></i></button>
@@ -409,10 +395,32 @@ Pan
                 <button type="button" class="btn btn-default" onclick="makehash()"><i class="fa fa-hashtag"></i></button>
 
             </div>
+            <div class="btn-group tool-item-group">
+            <div class="mdl-selectfield mdl-js-selectfield" style="padding:0px;">
+        <select class="mdl-selectfield__select" id="rules" name="rules">
+           <option value="ExtendedMooreB4S4">ExtendedMooreB4S4</option>
+                <!--<option value="SameDiagonals">SameDiagonals</option>-->
+                <option value="ExtendedMooreB4S3">ExtendedMooreB4S3</option>
+                <option value="ExtendedMooreB56S45">ExtendedMooreB56S45</option>
+                <option value="Extended2MooreB10S10">Extended2MooreB10S10</option>
+                <option value="HexB4S4">HexB4S4</option>
+                <option value="ColeRule" selected>ColeRule</option>
+                <option value="ColeRule2">ColeRule2</option>
+                <option value="PersianCarpet">PersianCarpet</option>
+                <option value="Life">Life</option>
+                <option value="Life2">Life2</option>
+                <option value="RPS">Rock Paper Scissors</option>
+                <option value="Caves">Caves</option>
+                <option value="infexpand">Infinite Expander</option>
+        </select>
+        
+      </div>
+    </div>
+            
 
         </div>
         <div class="tool-item-row">
-            <div class="tool-item-label-column"><div class="label">State:</div><div class="label">Color:</div></div>
+            <!--div class="tool-item-label-column"></div-->
             <div class="tool-item-state-selection"></div>
         </div>
 
@@ -429,6 +437,7 @@ Pan
 
 </script>
 <script class="rule-script"></script>
+<script src="mdl-selectfield.min.js"></script>
 
 </body>
 

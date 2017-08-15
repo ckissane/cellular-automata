@@ -507,6 +507,15 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
 .play-pause-button.playing .fa-pause{
     display:inline-block;
 }
+.play-pause-button .pause-icon{
+    display:none ;
+}
+.play-pause-button.playing .play-icon{
+    display:none;
+}
+.play-pause-button.playing .pause-icon{
+    display:inline-block;
+}
 .tool-item-label-column{
     display:inline-block;
     margin-left:6px;
@@ -533,10 +542,6 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
     padding-right: 4px;
     border:1px solid transparent;
 }
-.tool-item-state-selection .state-column.selected{
-    border:1px solid #00ACDB;
-
-}
 .tool-item-state-selection .state-column .label{
     vertical-align: baseline;
     display:table-row;
@@ -545,6 +550,15 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
     color:black;
     text-align: center;
     width:20px
+}
+.tool-item-state-selection .state-column button{
+    transform: scale(0.5);
+    transition: transform 0.5s;
+}
+.tool-item-state-selection .state-column.selected button{
+    transform: scale(1);
+    transition: transform 0.5s;
+
 }
 #file-open-input{
     display: none;

@@ -318,7 +318,7 @@ if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() ==
     var colors = ["black"].concat(Rule.colors);
     for (var i = 0; i < colors.length; i++) {
         //console.log(colors);
-        var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
+        var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-button--mini-fab" style="display:inline-block;box-sizing:border-box;background:'+ colors[i] +'"></button></div></div>');
 
     }
 }
@@ -611,13 +611,15 @@ function tick() {
     $(".toggle").attr("height", 30);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle="#424242";
+    ctx.fillRect(0, 0, w, h);
     ctx.translate(Math.floor(w / 2), Math.floor(h / 2));
     ctx.scale(zoom, zoom);
     ctx.strokeStyle = "black";
     var floorSX = scrollX - scrollX % 10;
     var floorSY = scrollY - scrollY % 10;
     if (zoom > 0.1/0.4) {
-        for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 2; x++) {
+        for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 4; x++) {
 
 
 
@@ -625,15 +627,15 @@ function tick() {
             ctx.lineWidth=2/zoom;
             ctx.moveTo(Math.floor(((-scrollX) % 10 - 10 + x * 10)*zoom)*1/zoom, (-scrollY) % 10 - 10 - h / zoom / 2);
             ctx.lineTo(Math.floor(((-scrollX) % 10 - 10 + x * 10)*zoom)*1/zoom, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
-            ctx.strokeStyle = "grey";
+            ctx.strokeStyle = "#9E9E9E";
             ctx.stroke();
         }
-        for (var y = -Math.ceil(h / zoom / 20) - 2; y < Math.ceil(h / zoom / 20) + 2; y++) {
+        for (var y = -Math.ceil(h / zoom / 20) - 2; y < Math.ceil(h / zoom / 20) + 4; y++) {
             ctx.beginPath();
             ctx.lineWidth=1/zoom;
             ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, Math.floor(((-scrollY) % 10 - 10 + y * 10)*zoom)*1/zoom);
             ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, Math.floor(((-scrollY) % 10 - 10 + y * 10)*zoom)*1/zoom);
-            ctx.strokeStyle = "grey";
+            ctx.strokeStyle = "#9E9E9E";
             ctx.stroke();
 
         }
@@ -641,9 +643,9 @@ function tick() {
     if (zoom >0.1/0.4) {
 
 
-        ctx.lineWidth=1/zoom;
+        ctx.lineWidth=2/zoom;
         ctx.beginPath();
-        ctx.strokeStyle = "#00ACDB";
+        ctx.strokeStyle = "#E57373";
         ctx.moveTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 - h / zoom / 2);
         ctx.lineTo(-scrollX - 10 + 1 * 10, (-scrollY) % 10 - 10 + 10 + h / zoom / 2);
         ctx.stroke();
@@ -652,7 +654,6 @@ function tick() {
 
 
         ctx.beginPath();
-        ctx.strokeStyle = "#00ACDB";
         ctx.moveTo((-scrollX) % 10 - 10 - w / zoom / 2, -scrollY - 10 + 1 * 10);
         ctx.lineTo((-scrollX) % 10 - 10 + 10 + w / zoom / 2, -scrollY - 10 + 1 * 10);
         ctx.stroke();
@@ -662,7 +663,33 @@ function tick() {
     countCells();
     //findGroups();
     for (var cell in cells) {
-        if(zoom >0.1/0.4){
+        if(zoom >0.1){
+            if (cell.substr(0, 3) == "POS") {
+                if (cells[cell].s != 2) {
+                    ctx.fillStyle = "red";
+                } else {
+                    ctx.fillStyle = "blue";
+                }
+                ctx.fillStyle = Rule.colors[cells[cell].s - 1];
+                
+                var boxX = cells[cell].x * 10 - scrollX;
+                var boxY = cells[cell].y * 10 - scrollY;
+                ctx.beginPath();
+                ctx.shadowBlur = 4;
+	ctx.fillStyle = "rgba(0,0,0,.26)";
+	ctx.shadowColor = "rgba(0,0,0,.26)";
+	ctx.shadowOffsetY = 4;
+	ctx.shadowOffsetX = 4;
+                ctx.fillRect(Math.floor((boxX)*zoom)*1/zoom, Math.floor((boxY)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX)*zoom)*1/zoom,Math.floor((boxY+10)*zoom)*1/zoom-Math.floor((boxY)*zoom)*1/zoom);
+                //ctx.arc(Math.floor((boxX+5)*zoom)*1/zoom, Math.floor((boxY+5)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX+5)*zoom)*1/zoom,0,Math.PI*2,true);
+                
+                ctx.fill();
+                
+            }
+        }
+    }
+    for (var cell in cells) {
+        if(zoom >0.1){
             if (cell.substr(0, 3) == "POS") {
                 if (cells[cell].s != 2) {
                     ctx.fillStyle = "red";
@@ -673,7 +700,13 @@ function tick() {
                 var boxX = cells[cell].x * 10 - scrollX;
                 var boxY = cells[cell].y * 10 - scrollY;
                 ctx.beginPath();
+                ctx.shadowBlur = 0;
+	ctx.shadowColor = "rgba(0,0,0,0)";
+	ctx.shadowOffsetY = 0;
+	ctx.shadowOffsetX = 0;
                 ctx.fillRect(Math.floor((boxX)*zoom)*1/zoom, Math.floor((boxY)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX)*zoom)*1/zoom,Math.floor((boxY+10)*zoom)*1/zoom-Math.floor((boxY)*zoom)*1/zoom);
+                //ctx.arc(Math.floor((boxX+5)*zoom)*1/zoom, Math.floor((boxY+5)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX+5)*zoom)*1/zoom,0,Math.PI*2,true);
+                
                 ctx.fill();
             }
         }else{
@@ -868,7 +901,7 @@ function selectRule() {
         var colors = ["black"].concat(Rule.colors);
         for (var i = 0; i < colors.length; i++) {
             //console.log(colors);
-            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label">'+i+'</div><div class="label"><div style="height:12px;width:12px;display:inline-block;border:1px solid grey;box-sizing:border-box;background:'+ colors[i] +'"></div></div></div>');
+            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-button--mini-fab" style="display:inline-block;box-sizing:border-box;background:'+ colors[i] +'"></button></div></div>');
 
             //var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
         }
