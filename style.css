@@ -553,11 +553,11 @@ div.b-in-group, div.s-in-group,div.b2-in-group, div.s2-in-group{
 }
 .tool-item-state-selection .state-column button{
     transform: scale(0.5);
-    transition: transform 0.5s;
+    transition: transform 0.1s;
 }
 .tool-item-state-selection .state-column.selected button{
     transform: scale(1);
-    transition: transform 0.5s;
+    transition: transform 0.1s;
 
 }
 #file-open-input{
