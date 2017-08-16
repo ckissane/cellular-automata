@@ -160,7 +160,6 @@ function loadSave(x) {
     }
 }
 
-
 function savePattern() {
     download();
 }
@@ -168,9 +167,6 @@ function savePattern() {
 function submitpat() {
     clearCells();
     var x = $("#inputTextToSave").val();
-    //  console.log(convertToHash(x));
-    //console.log(convertFromHash(convertToHash(x)));
-    //x=convertFromHash(convertToHash(x));
     var cellList = x.split("|");
     for (var i = 0; i < cellList.length; i++) {
         var element = cellList[i].split(",");
@@ -179,26 +175,17 @@ function submitpat() {
 }
 
 function MouseWheelHandler(e) {
-    e.preventDefault();
     // cross-browser wheel delta
     var e = window.event || e; // old IE support
     var delta = 0;
 
     e.preventDefault();
 
-    if (e.deltaY) { // FireFox 17+ (IE9+, Chrome 31+?)
-        delta = -e.deltaY;
-    } else if (e.wheelDelta) {
-        delta = e.wheelDelta || -e.detail;
-    }
+    if (e.deltaY) delta = -e.deltaY;
+    else if (e.wheelDelta) delta = e.wheelDelta || -e.detail;
+    
     delta = Math.max(-1, Math.min(1, (delta)));
-    //var mouseDiffX=mouseX - w / 2;
-    //var mouseDiffY=mouseH - h / 2;
-    //var gridX = (mouseX - w / 2 + scrollX*zoom) / 10 / zoom;
-    //var gridY = (mouseY - h / 2 + scrollY*zoom) / 10 / zoom;
-    //var oGridX = (0 + scrollX*zoom) / 10 / zoom;
-    //var oGridY = (0 + scrollY*zoom) / 10 / zoom;
-    //var oldZoom=zoom+0;
+
     var offsetX = e.pageX - 0 - document.body.scrollLeft - w / 2;
     var offsetY = e.pageY - 0 - document.body.scrollTop - h / 2;
     var oGridX = (mouseX - w / 2 + scrollX * zoom) / 10 / zoom;
@@ -207,21 +194,16 @@ function MouseWheelHandler(e) {
     var pGridY = oGridY - (0 + scrollY * zoom) / 10 / zoom;
 
     zoom = zoom * Math.pow(1.1, -delta/2);
-    var newOffsetX = e.pageX - 0 - document.body.scrollLeft - w / 2;
-    var newOffsetY = e.pageY - 0 - document.body.scrollTop - h / 2;
-    if (zoom < Math.pow(1.5, -16)) {
-        zoom = Math.pow(1.5, -16);
-    }
-    if (zoom > Math.pow(1.5, 6)) {
-        zoom = Math.pow(1.5, 6);
-    }
+    
+    if (zoom < Math.pow(1.5, -16)) zoom = Math.pow(1.5, -16);
+    if (zoom > Math.pow(1.5, 6)) zoom = Math.pow(1.5, 6);
+    
     var newGridX = (mouseX - w / 2 + scrollX * zoom) / 10 / zoom;
     var newGridY = (mouseY - h / 2 + scrollY * zoom) / 10 / zoom;
     var newPGridX = newGridX - (0 + scrollX * zoom) / 10 / zoom;
     var newPGridY = newGridY - (0 + scrollY * zoom) / 10 / zoom;
     scrollX += -(newPGridX - pGridX) * 10;
     scrollY += -(newPGridY - pGridY) * 10;
-    //onwheel(e);
 }
 function zoomOut(){
     zoom = zoom * Math.pow(1.5, -1);
@@ -706,9 +688,7 @@ function tick() {
 	ctx.shadowColor = "rgba(0,0,0,0)";
 	ctx.shadowOffsetY = 0;
 	ctx.shadowOffsetX = 0;
-                ctx.fillRect(Math.floor((boxX)*zoom)*1/zoom, Math.floor((boxY)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX)*zoom)*1/zoom,Math.floor((boxY+10)*zoom)*1/zoom-Math.floor((boxY)*zoom)*1/zoom);
-                //ctx.arc(Math.floor((boxX+5)*zoom)*1/zoom, Math.floor((boxY+5)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX+5)*zoom)*1/zoom,0,Math.PI*2,true);
-                
+                ctx.fillRect(Math.floor((boxX)*zoom)*1/zoom, Math.floor((boxY)*zoom)*1/zoom, Math.floor((boxX+10)*zoom)*1/zoom-Math.floor((boxX)*zoom)*1/zoom,Math.floor((boxY+10)*zoom)*1/zoom-Math.floor((boxY)*zoom)*1/zoom);                
                 ctx.fill();
             }
         }else{
@@ -727,7 +707,7 @@ function tick() {
             }
         }
     }
-    if(selection.on){
+    if(selection.on) {
         var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
         var boxX = selectionOrdered.start.x * 10 - scrollX;
         var boxY =selectionOrdered.start.y * 10 - scrollY;
@@ -737,7 +717,7 @@ function tick() {
         ctx.fill();
 
     }
-    if(pasting){
+    if(pasting) {
         var gridX = Math.floor((mouseX - w / 2 + scrollX * zoom) / 10 / zoom);
         var gridY = Math.floor((mouseY - h / 2 + scrollY * zoom) / 10 / zoom);
         selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
@@ -757,7 +737,6 @@ function tick() {
 function clearCells() {
     stop();
     for (var cell in cells) {
-
         if (cell.substr(0, 3) == "POS") {
             delete cells[cell];
         }
@@ -766,7 +745,6 @@ function clearCells() {
     scrollY=0;
     generations=0;
     zoom = Math.pow(1.5, -2);
-    //console.log(generations)
     $(".cell-gen").html(" Generation: " + generations);
 }
 
@@ -801,9 +779,6 @@ function randomCells() {
 function randomFill() {
     clearSelected();
     if(selection.on){
-
-
-
         if (Rule.randomFill != null) {
             Rule.randomFill();
         } else {
@@ -842,13 +817,9 @@ function loadAndOpenFile() {
     var fileReader = new FileReader();
     fileReader.onload = function(fileLoadedEvent) {
         var textFromFileLoaded = fileLoadedEvent.target.result;
-        //$("#inputTextToSave")[0].value = textFromFileLoaded;
         clearCells();
 
-        var x = textFromFileLoaded;//$("#inputTextToSave").val();
-        //  console.log(convertToHash(x));
-        //console.log(convertFromHash(convertToHash(x)));
-        //x=convertFromHash(convertToHash(x));
+        var x = textFromFileLoaded;
         var cellList = x.split("|");
         for (var i = 0; i < cellList.length; i++) {
             var element = cellList[i].split(",");
@@ -865,15 +836,10 @@ function loadFileAsText() {
     fileReader.onload = function(fileLoadedEvent) {
         var textFromFileLoaded = fileLoadedEvent.target.result;
         $("#inputTextToSave")[0].value = textFromFileLoaded;
-        //submitpat();
         var textFromFileLoaded = fileLoadedEvent.target.result;
-        //$("#inputTextToSave")[0].value = textFromFileLoaded;
         clearCells();
 
-        var x = textFromFileLoaded;//$("#inputTextToSave").val();
-        //  console.log(convertToHash(x));
-        //console.log(convertFromHash(convertToHash(x)));
-        //x=convertFromHash(convertToHash(x));
+        var x = textFromFileLoaded;
         var cellList = x.split("|");
         for (var i = 0; i < cellList.length; i++) {
             var element = cellList[i].split(",");
@@ -894,7 +860,6 @@ function cloneObject(obj) {
     return clone;
 }
 function selectRule() {
-    //$("#rule-area") = $("#rules").value;
     if (Rule != eval($("#rules").val()) || $(".tool-item-state-selection").html() == "") {
         Rule = eval($("#rules").val());
 
@@ -902,10 +867,7 @@ function selectRule() {
         $(".tool-item-state-selection").html("");
         var colors = ["black"].concat(Rule.colors);
         for (var i = 0; i < colors.length; i++) {
-            //console.log(colors);
-            var element=$(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-button--mini-fab" style="display:inline-block;box-sizing:border-box;background:'+ colors[i] +'"></button></div></div>');
-
-            //var element = $(".color-select").append("<div style=\'height:20px;width:20px;margin-left:10px;margin-top:5px;display:inline-block;background:" + colors[i] + "\' onclick=\'paintColor=" + i + "\'></div>");
+            $(".tool-item-state-selection").append('<div class="state-column '+(i===1?"selected":"")+'" value="'+i+'" onclick="selectColor(' + i + ')"><div class="label"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-button--mini-fab" style="display:inline-block;box-sizing:border-box;background:'+ colors[i] +'"></button></div></div>');
         }
         paintColor=1;
     }
@@ -928,10 +890,7 @@ function selectRule() {
         var loc="?"+paramList.join("&");
         var current=document.location.href;
         var stateObj = {  current: loc };
-        //window.location.search = loc;
         history.pushState(stateObj, "Super Cellular Automata", loc);
-        //history.pushState({}, loc, loc);
-        // window. = paramList.join("&");
     }
 }
 function printCells(){
@@ -1045,24 +1004,9 @@ function paste(){
     selection={on:true,start:{x:gridX,y:gridY},end:{x:gridX+clipboardDim.w-1,y:gridY+clipboardDim.h-1}};
     if(selection.on){
         var selectionOrdered={on:true,start:{x:Math.min(selection.start.x,selection.end.x),y:Math.min(selection.start.y,selection.end.y)},end:{x:Math.max(selection.start.x,selection.end.x),y:Math.max(selection.start.y,selection.end.y)}};
-        /*  for(var x=selectionOrdered.start.x;x<=selectionOrdered.end.x;x++){
-        for(var y=selectionOrdered.start.y;y<=selectionOrdered.end.y;y++){
-        if(cells["POS" + x + "_" + y]){
-        if(cells["POS" + x + "_" + y].s!==0){
-
-        delete cells["POS" + x + "_" + y];
-    }
-}
-}
-}
-*/
 
 for(var i=0;i<clipboard.length;i++){
 
-
-
-    //clipboard[i].x=clipboard[i].x+selectionOrdered.start.x;
-    //clipboard[i].y=clipboard[i].y+selectionOrdered.start.y;
     addCell(clipboard[i].x+selectionOrdered.start.x,clipboard[i].y+selectionOrdered.start.y,clipboard[i].s);
 }
 }
@@ -1080,7 +1024,7 @@ Mousetrap.bind(['command+v', 'ctrl+v'], function(e) {
     return false;
 });
 Mousetrap.bind(['command+s', 'ctrl+s'], function(e) {
-    savePattern();
+    download();
     return false;
 });
 Mousetrap.bind(['command+o', 'ctrl+o'], function(e) {

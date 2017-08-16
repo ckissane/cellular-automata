@@ -8,24 +8,11 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="Celly.css" rel="stylesheet">
     <script src="Filesaver.js"></script>
-    <script src="drivefilepicker.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="mdl-selectfield.min.css" />
     <script>
-    function initPicker() {
-        var picker = new FilePicker({
-            apiKey: 'AIzaSyAnnMlYPCRAoxACUYS86GF3FH5gk_9iqag',
-            clientId: 411044250671,
-            buttonEl: document.getElementById('pick'),
-            onSelect: function(file) {
-                console.log(file);
-                alert('Selected ' + file.title);
-            }
-        });
-    }
-
     function download(text) {
         var cellArray = [];
         var saveString = "";
@@ -39,9 +26,7 @@
         var file = new Blob([cellArray.join("|")], {
             type: 'text'
         });
-        //window.open(URL.createObjectURL(file));
         saveAs(file, "Cells.txt");
-
     }
     var w = $("body").width();
     var h = $("body").height();
@@ -55,7 +40,6 @@ var mButton=0;
     var selection={on:false,start:{x:0,y:0},end:{x:0,y:0}};
     var pasting=false;
     function startDrag(event) {
-        //console.log("drag");
         dragging = true;
         mouseX = (event.pageX - $('#c').offset().left) + $(window).scrollLeft();
         mouseY = (event.pageY - $('#c').offset().top) + $(window).scrollTop();
@@ -69,7 +53,6 @@ var mButton=0;
 
             if (cells["POS" + gridX + "_" + gridY] != null) {
                 if (cells["POS" + gridX + "_" + gridY].s === paintColor) {
-                    // cells[gridX+","+gridY]=null;
                     delete cells["POS" + gridX + "_" + gridY];
 
                     paintMode=false;
@@ -107,7 +90,6 @@ var mButton=0;
             selection.end.x=gridX;
             selection.end.y=gridY;
         }
-        //console.log(cells);
     }
     function drawWithMouse(x,y){
 
@@ -115,8 +97,6 @@ var mButton=0;
         var gridX = Math.floor((x - w / 2 + scrollX * zoom) / 10 / zoom);
         var gridY = Math.floor((y - h / 2 + scrollY * zoom) / 10 / zoom);
         if (cells["POS" + gridX + "_" + gridY] != null) {
-
-
             if (paintColor === 0 || (!paintMode)) {
                 delete cells["POS" + gridX + "_" + gridY];
             } else {
@@ -138,7 +118,6 @@ var mButton=0;
                 };
             }
         }
-
     }
     function drag(event) {
 
@@ -174,7 +153,6 @@ var mButton=0;
                 selection.on=false;
             }
         }
-        //console.log(cells);
     }
 
     function whenMove(event) {
@@ -201,18 +179,14 @@ parent.classList.add("selected");
 }
 
     </script>
-    <script src="https://www.google.com/jsapi?key=PUT_YOUR_API_KEY_HERE"></script>
-    <script src="https://apis.google.com/js/client.js?onload=initPicker"></script>
-
-
-
+   
     <style>
     </style>
     <link rel="stylesheet" type="text/css" href="boot.css">
     <link rel="stylesheet" type="text/css" href="DriveApp.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Cellular Automaton</title>
-    <link rel="icon" type="image/png" href="https://github.com/modderme123/cellular-automaton/blob/gh-pages/Glider.png">
+    <link rel="icon" type="image/png" href="Glider.png">
 </head>
 
 <body>
@@ -257,7 +231,7 @@ parent.classList.add("selected");
                                     <tbody>
                                         <tr>
                                             <td class="gwt-MenuItem" id="gwt-uid-1" role="menuitem" aria-haspopup="true">File<div class="menu-popup">
-                                                <div class="menu-popup-item" onclick="savePattern()">Save</div>
+                                                <div class="menu-popup-item" onclick="download()">Save</div>
                                                 <div class="menu-popup-item" onclick="document.getElementById('file-open-input').click()">Open<input id="file-open-input" type="file" onchange="loadAndOpenFile()"></div>
                                             </div></td>
                                             <td class="gwt-MenuItem" id="gwt-uid-30" role="menuitem" aria-haspopup="true">Edit<div class="menu-popup">
@@ -296,7 +270,7 @@ parent.classList.add("selected");
 
             <div class="options-section-sub">Input/Output</div>
 
-            <button id="save-button" type="button" class="btn btn-default btn-warning" onclick="savePattern()">Save</button>
+            <button id="save-button" type="button" class="btn btn-default btn-warning" onclick="download()">Save</button>
             <button id="make-hash-button" type="button" onclick="makehash()" class="btn btn-success">Create Hash Url</button>
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
@@ -381,7 +355,7 @@ Pan
                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="zoomOut()"><i class="material-icons">zoom_out</i></button>
             </div>
             <div class="btn-group tool-item-group">
-                <button type="button" class="btn btn-default" onclick="savePattern()"><i class="fa fa-download"></i></button>
+                <button type="button" class="btn btn-default" onclick="download()"><i class="fa fa-download"></i></button>
                 <button type="button" class="btn btn-default" onclick="document.getElementById('file-open-input').click()"><i class="fa fa-upload"></i></button>
                 <button type="button" class="btn btn-default" onclick="makehash()"><i class="fa fa-hashtag"></i></button>
 
