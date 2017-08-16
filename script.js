@@ -619,6 +619,7 @@ function tick() {
     var floorSX = scrollX - scrollX % 10;
     var floorSY = scrollY - scrollY % 10;
     if (zoom > 0.1/0.4) {
+        ctx.globalAlpha=Math.max(0,Math.min(1-0.1/0.4/zoom,1));
         for (var x = -Math.ceil(w / zoom / 20) - 2; x < Math.ceil(w / zoom / 20) + 4; x++) {
 
 
@@ -639,8 +640,9 @@ function tick() {
             ctx.stroke();
 
         }
+        ctx.globalAlpha=1;
     }
-    if (zoom >0.1/0.4) {
+    //if (zoom >0.1/0.4) {
 
 
         ctx.lineWidth=2/zoom;
@@ -659,7 +661,7 @@ function tick() {
         ctx.stroke();
 
 
-    }
+    //}
     countCells();
     //findGroups();
     for (var cell in cells) {

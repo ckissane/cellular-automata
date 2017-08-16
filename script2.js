@@ -229,7 +229,7 @@ function toggleCalc() {
 
 function stop() {
     inToggle = true;
-    $('#run-toggle').bootstrapToggle('off');
+    //$('#run-toggle').bootstrapToggle('off');
     if (!running) {
 
     } else {
@@ -242,7 +242,7 @@ function stop() {
 
 function start() {
     inToggle = true;
-    $('#run-toggle').bootstrapToggle('on');
+    //$('#run-toggle').bootstrapToggle('on');
     if (!running) {
         selectRule();
         //$(".rule-script").html($(".rule-area").val());
@@ -445,7 +445,7 @@ function tick() {
         }
     }
     countCells();
-    //findGroups();
+    findGroups();
     for (var cell in cells) {
 
         if (cell.substr(0, 3) == "POS") {
@@ -455,6 +455,7 @@ function tick() {
                 ctx.fillStyle = "blue";
             }
             ctx.fillStyle = Rule.colors[cells[cell].s - 1];
+             ctx.fillStyle =cells[cell].color;
             var boxX = cells[cell].x * 10 - scrollX;
             var boxY = cells[cell].y * 10 - scrollY;
             ctx.beginPath();

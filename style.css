@@ -124,7 +124,7 @@ body{text-align:center; padding-top:30px;}
     margin:0px;
 }
 div.canvas-cont-big {
-    width:calc( 100% - 245px );
+    width:calc( 100% );
     box-sizing: border-box;
     height:calc( 100% - 60px );
     margin-top:0px;
