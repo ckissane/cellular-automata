@@ -355,7 +355,7 @@ Pan
             </div>
             <div class="btn-group tool-item-group">
                 <button class="mdl-button mdl-js-button mdl-button--icon" onclick="download()"><i class="material-icons">file_download</i></button>
-                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="document.getElementById('file-open-input').click()"><i class="material-icons">file_upload</i></button>
+                <button class="mdl-button mdl-js-button mdl-button--icon" onclick="importDialog()"><i class="material-icons">file_upload</i></button>
                 <button class="mdl-button mdl-js-button mdl-button--icon" onclick="makehash()"><b>#</b></button>
 
             </div>
@@ -364,14 +364,14 @@ Pan
         <select class="mdl-selectfield__select" id="rules" name="rules">
            <option value="ExtendedMooreB4S4">ExtendedMooreB4S4</option>
                 <!--<option value="SameDiagonals">SameDiagonals</option>-->
-                <option value="ExtendedMooreB4S3">ExtendedMooreB4S3</option>
-                <option value="ExtendedMooreB56S45">ExtendedMooreB56S45</option>
-                <option value="Extended2MooreB10S10">Extended2MooreB10S10</option>
-                <option value="HexB4S4">HexB4S4</option>
-                <option value="ColeRule" selected>ColeRule</option>
-                <option value="ColeRule2">ColeRule2</option>
-                <option value="PersianCarpet">PersianCarpet</option>
-                <option value="Life">Life</option>
+                <option value="ExtendedMooreB4S3" class="mdl-menu__item">ExtendedMooreB4S3</option>
+                <option value="ExtendedMooreB56S45" class="mdl-menu__item">ExtendedMooreB56S45</option>
+                <option value="Extended2MooreB10S10" class="mdl-menu__item">Extended2MooreB10S10</option>
+                <option value="HexB4S4" class="mdl-menu__item">HexB4S4</option>
+                <option value="ColeRule" class="mdl-menu__item" selected>ColeRule</option>
+                <option value="ColeRule2" class="mdl-menu__item">ColeRule2</option>
+                <option value="PersianCarpet" class="mdl-menu__item">PersianCarpet</option>
+                <option value="Life" class="mdl-menu__item">Life</option>
                 <option value="Life2">Life2</option>
                 <option value="RPS">Rock Paper Scissors</option>
                 <option value="Caves">Caves</option>
@@ -402,16 +402,74 @@ Pan
 </script>
 <script class="rule-script"></script>
 <script src="mdl-selectfield.min.js"></script>
-<dialog class="mdl-dialog">
+<dialog class="mdl-dialog" id="import-dialog">
     <h4 class="mdl-dialog__title">Import</h4>
     <div class="mdl-dialog__content">
-      
+
+<form action="#">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="import-text">
+    <label class="mdl-textfield__label" for="import-text">Code...</label>
+  </div>
+<p>or</p>
+<button type="button" class="mdl-button" onclick="loadFile()">Load From File</button>
+<input id="file-import-input" style="display:none;" type="file" onchange="loadAndOpenFileToBox()"></div>
+</form>
+
     </div>
     <div class="mdl-dialog__actions">
-      <button type="button" class="mdl-button">Agree</button>
+      <button type="button" class="mdl-button" onclick="loadFileFromBox();">Import</button>
       <button type="button" class="mdl-button close">Cancel</button>
     </div>
   </dialog>
+<script>
+    function importDialog(){
+     
+  var dialog = document.querySelector('dialog#import-dialog');
+  
+    dialog.showModal();
+    dialog.querySelector('dialog#import-dialog .close').addEventListener('click', function() {
+      dialog.close();
+      var importArea=document.querySelector("#import-text");
+      importArea.form.reset();
+      importArea.parentElement.classList.remove("is-dirty");
+    });
+
+    /* Or dialog.show(); to show the dialog without a backdrop. */
+    }
+function loadFile() {
+    document.getElementById('file-import-input').click()
+
+}
+function loadAndOpenFileToBox() {
+    var fileToLoad = $("input#file-import-input")[0].files[0];
+
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) {
+        document.getElementById("import-text").value = fileLoadedEvent.target.result;
+        document.getElementById("import-text").parentElement.classList.add("is-dirty");
+
+    };
+    
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
+function loadFileFromBox(){
+    clearCells();
+
+        var x = document.getElementById("import-text").value;
+        var cellList = x.split("|");
+        for (var i = 0; i < cellList.length; i++) {
+            var element = cellList[i].split(",");
+            addCell(parseInt(element[0]), parseInt(element[1]), parseInt(element[2]));
+        }
+        var dialog = document.querySelector('dialog#import-dialog');
+        dialog.close();
+      var importArea=document.querySelector("#import-text");
+      importArea.form.reset();
+      importArea.parentElement.classList.remove("is-dirty");
+}
+//document.getElementById('file-open-input').click()
+</script>
 </body>
 
 </html>
