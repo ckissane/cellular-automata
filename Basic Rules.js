@@ -133,8 +133,8 @@ var ExtendedMooreB4S3 = {
         }
     }
 };
-var Extended2MooreB10S10 = {
-    ruleName: "7x7;B10S10",
+var Extended2MooreB6S4 = {
+    ruleName: "7x7;B6S4",
     colors: ["white"],
     states: 2,
     neighborsForCell: function(cell, cellset) {
@@ -153,7 +153,7 @@ var Extended2MooreB10S10 = {
         return neighbors;
     },
     calcCell: function(cell, cellset) {
-        var nebs = Extended2MooreB10S10.neighborsForCell(cell, cellset);
+        var nebs = Extended2MooreB6S4.neighborsForCell(cell, cellset);
         var nebCount = 0;
         for (var i = 0; i < nebs.length; i++) {
             if (nebs[i].s != 0) {

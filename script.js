@@ -785,15 +785,18 @@ function randomFill() {
             var selectionOrdered = { on: true, start: { x: Math.min(selection.start.x, selection.end.x), y: Math.min(selection.start.y, selection.end.y) }, end: { x: Math.max(selection.start.x, selection.end.x), y: Math.max(selection.start.y, selection.end.y) } };
             clipboardDim = { w: selectionOrdered.end.x - selectionOrdered.start.x + 1, h: selectionOrdered.end.y - selectionOrdered.start.y + 1 };
 
-            for (var i = 0; i < Math.ceil(clipboardDim.w * clipboardDim.h / 4); i++) {
-                var gridX = selectionOrdered.start.x + Math.floor(Math.random() * clipboardDim.w);
-                var gridY = selectionOrdered.start.y + Math.floor(Math.random() * clipboardDim.h);
-                var state = Math.floor(Math.random() * 1) + 1
+            for (var i = 0; i < Math.ceil(clipboardDim.w * clipboardDim.h ); i++) {
+                var gridX = selectionOrdered.start.x + i%clipboardDim.w;//Math.floor(Math.random() * clipboardDim.w);
+                var gridY = selectionOrdered.start.y + Math.floor(i/clipboardDim.w);//Math.floor(Math.random() * clipboardDim.h);
+                var state = Math.random()<0.3702?1:0;
                 cells["POS" + gridX + "_" + gridY] = {
                     x: gridX,
                     y: gridY,
                     s: state
                 };
+                if(state===0){
+delete cells["POS" + gridX + "_" + gridY];
+                }
             }
         }
     }
@@ -805,6 +808,9 @@ function addCell(gridX, gridY, state) {
         y: gridY,
         s: state
     };
+    if(state===0){
+delete cells["POS" + gridX + "_" + gridY];
+                }
 }
 
 function test() {
